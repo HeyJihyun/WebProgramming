@@ -7,6 +7,8 @@
 </head>
 <body>
     <%
+    
+    
         // 현재 로그인 상태인지 확인
         boolean isLoggedIn = session.getAttribute("id") != null;
 
