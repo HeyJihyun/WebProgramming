@@ -15,7 +15,7 @@
         } else {
     %>
             <h1>Login</h1>
-            <form action="../loginprocess" method="post">
+            <form action="./loginprocess.jsp" method="post">
                 <label for="id">ID:</label>
                 <input type="text" name="id" id="id" required>
                 <br>
