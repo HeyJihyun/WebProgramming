@@ -11,9 +11,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	첫번째 이름 : <%= nameArray[0] %> <br>
-	첫번째 이름 : <%= ((String[])pageContext.getAttribute("names"))[0] %> <br>
-	EL 첫번째 이름 : ${ names[0] } <br>
-	EL 네번째 이름 : ${ names[4] }  <br>
+	첫번째 이름 :
+	<%= nameArray[0] %>
+	<br> 첫번째 이름 :
+	<%= ((String[])pageContext.getAttribute("names"))[0] %>
+	<br> EL 첫번째 이름 : ${ names[0] }
+	<br> EL 네번째 이름 : ${ names[4] }
+	<br>
 </body>
 </html>

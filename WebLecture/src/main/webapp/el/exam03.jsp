@@ -18,10 +18,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	ISBN : <%= b.get("isbn") %><br>
-	
-	EL ISBN : ${ book.isbn } <br>
-	EL TITLE : ${ book.title } <br>
-	EL COMPANY : ${ empty book.company } <br>
+	ISBN :
+	<%= b.get("isbn") %><br> EL ISBN : ${ book.isbn }
+	<br> EL TITLE : ${ book.title }
+	<br> EL COMPANY : ${ empty book.company }
+	<br>
 </body>
 </html>

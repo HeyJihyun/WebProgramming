@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<center>
-Include JSP File...
-<br>
-name : <%=request.getAttribute("name") %><br>
-data : <%=request.getParameter("data") %>
-</center>
+	<center>
+		Include JSP File... <br> name :
+		<%=request.getAttribute("name") %><br> data :
+		<%=request.getParameter("data") %>
+	</center>
 </body>
 </html>

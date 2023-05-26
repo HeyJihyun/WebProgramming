@@ -10,8 +10,8 @@
 	<%-- http://localhost:808/WebLecture/el/exam01.jsp?name=hong 입력시 hong 출력 --%>
 
 	이름 :
-	<%= request.getParameter("name") %><br> 
-	이름 : ${ param.name} <br>
-	ID : ${ param.id } <br>
+	<%= request.getParameter("name") %><br> 이름 : ${ param.name}
+	<br> ID : ${ param.id }
+	<br>
 </body>
 </html>

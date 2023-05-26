@@ -1,4 +1,4 @@
-<%@ page import="kr.ac.kopo.book.BookVO" %>
+<%@ page import="kr.ac.kopo.book.BookVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -20,13 +20,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	ISBN : <%= book.getIsbn() %><br>
-	EL ISBN : ${ book.isbn }<br>
-	EL Title : ${ pageScope.book.title }<br>
+	ISBN :
+	<%= book.getIsbn() %><br> EL ISBN : ${ book.isbn }
+	<br> EL Title : ${ pageScope.book.title }
+	<br>
 	<!-- 	getter 메소드가 없어서 에러 -->
-<%-- 	EL COMPANY : ${ book.company } <br>  --%>
+	<%-- 	EL COMPANY : ${ book.company } <br>  --%>
 
-	EL Title : ${book["title"] } <br>
-	
+	EL Title : ${book["title"] }
+	<br>
+
 </body>
 </html>

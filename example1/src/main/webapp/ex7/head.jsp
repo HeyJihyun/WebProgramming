@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%@ page import="java.util.Date" %>
-<%@ page session= "false"%>
+<%@ page import="java.util.Date"%>
+<%@ page session="false"%>
 <%!
 Date date;
 String name;
 String email;
  %>
- 
- <%!
+
+<%!
  public int getLength(){
 	 int len = email.length();
 	 return len;
@@ -26,6 +26,7 @@ String email;
 	<%
 	 date = new Date();
 	%>
-	현재 날짜 <%= date.toLocaleString() %>
+	현재 날짜
+	<%= date.toLocaleString() %>
 </body>
 </html>

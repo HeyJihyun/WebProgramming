@@ -14,7 +14,8 @@
 	session.setAttribute("id", id);
 	application.setAttribute("id", id);
 	%>
-	<h1><%=id%>로 로그인 하였습니다.</h1>
+	<h1><%=id%>로 로그인 하였습니다.
+	</h1>
 	<br>
 	<a href="./twopage.jsp">이동</a>
 </body>

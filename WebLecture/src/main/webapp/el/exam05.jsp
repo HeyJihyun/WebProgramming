@@ -15,7 +15,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	첫번째 이름 : <%= nameList.get(0) %><br>
-	EL 첫번째 이름 : ${ names[0] } <br>
+	첫번째 이름 :
+	<%= nameList.get(0) %><br> EL 첫번째 이름 : ${ names[0] }
+	<br>
 </body>
 </html>

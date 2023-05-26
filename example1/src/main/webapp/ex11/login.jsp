@@ -7,7 +7,7 @@
 <title>Login</title>
 </head>
 <body>
-<% 
+	<% 
     String id = (String) session.getAttribute("id");
     
 
@@ -16,7 +16,7 @@
         return; 
     }
     %>
-    
+
 	<form method="post" action="./loginProcess.jsp">
 		<input type="text" name="id" placeholder="ID"> <input
 			type="password" name="password" placeholder="PASSWORD"> <input
@@ -24,4 +24,3 @@
 	</form>
 </body>
 </html>
-  

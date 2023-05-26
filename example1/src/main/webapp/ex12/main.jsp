@@ -23,7 +23,8 @@
 	<br> Boolean : ${true}
 	<br> null : ${null}
 	<br> ${map["1"]}
-	<br> map[1] : <%= a %>
+	<br> map[1] :
+	<%= a %>
 	<br> ${10 + 20 }
 	<br> ${100/20 }
 	<br> ${5%2 }
