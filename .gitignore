@@ -5,3 +5,11 @@ example1/.settings/
 example1/.classpath
 example1/.project
 JHLibrary/
+WebTest/build/
+WebTest/.settings/
+WebTest/.classpath
+WebTest/.project
+WebLecture/build/
+WebLecture/.settings/
+WebLecture/.classpath
+WebLecture/.project
