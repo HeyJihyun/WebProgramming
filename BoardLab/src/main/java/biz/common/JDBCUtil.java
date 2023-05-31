@@ -40,6 +40,7 @@ public class JDBCUtil {
         }
     }
 
+    // connection 닫는 메소드(rs, stmt, conn)
     public static void close(ResultSet rs, Statement stmt, Connection conn) {
         try {
             if (rs != null)
