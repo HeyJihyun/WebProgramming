@@ -9,6 +9,7 @@ public class BoardVO {
     private String writer;
     private String content;
     private Date regdate;
+    private int hit;
 
     public BoardVO() {
         super();
@@ -64,10 +65,17 @@ public class BoardVO {
         this.regdate = regdate;
     }
 
+    public int getHit() {
+        return hit;
+    }
+
+    public void setHit(int hit) {
+        this.hit = hit;
+    }
+
     @Override
     public String toString() {
         return "BoardVO [seq=" + seq + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
-                + regdate + "]";
+                + regdate + ", hit=" + hit + "]";
     }
-
 }

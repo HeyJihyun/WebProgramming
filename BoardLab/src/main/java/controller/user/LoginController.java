@@ -32,7 +32,7 @@ public class LoginController implements Controller {
             HttpSession session = request.getSession();
             session.setAttribute("user", vo);
             System.out.println(session.getAttribute("user"));
-            return "ok.jsp";
+            return "getBoardList.do";
         } else {
             return "login.html";
         }

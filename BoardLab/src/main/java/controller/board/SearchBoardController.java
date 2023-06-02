@@ -1,17 +1,16 @@
 package controller.board;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import biz.board.BoardDAO;
 import biz.board.BoardVO;
-import biz.user.UserVO;
 import controller.Controller;
 
-public class InsertBoardController implements Controller {
+public class SearchBoardController implements Controller {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
@@ -21,16 +20,15 @@ public class InsertBoardController implements Controller {
             e.printStackTrace();
         }
 
-        HttpSession session = request.getSession();
-
-        BoardVO vo = new BoardVO();
-        vo.setTitle(request.getParameter("title"));
-        vo.setWriter(((UserVO) session.getAttribute("user")).getName());
-        vo.setContent(request.getParameter("content"));
+        String search = request.getParameter("search");
+        String content = request.getParameter("content");
 
         BoardDAO dao = new BoardDAO();
-        dao.insertBoard(vo);
+        List<BoardVO> boardList = dao.searchBoard(search, content);
 
-        return "getBoardList.do";
+        request.setAttribute("boardList", boardList);
+
+        return "getBoardList.jsp";
+
     }
 }
