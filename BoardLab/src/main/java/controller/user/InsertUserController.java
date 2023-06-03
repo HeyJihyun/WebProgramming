@@ -28,7 +28,7 @@ public class InsertUserController implements Controller {
         UserDAO dao = new UserDAO();
         dao.insertUser(vo);
 
-        return "login.html";
+        return "/jsp/login/login.jsp";
     }
 
 }

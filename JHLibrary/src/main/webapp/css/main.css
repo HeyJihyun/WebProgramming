@@ -1,0 +1,391 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* header */
+hr {
+    color: #777;
+    margin: 0px;
+}
+
+section {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #555;
+}
+
+header {
+    font-family: 'Pretendard-Regular';
+    font-weight: 300;
+}
+
+li {
+    display: inline-block;
+}
+
+.menu_wrap {
+    position: relative;
+}
+
+.first-nav {
+    position: relative;
+    margin: 10px auto;
+    width: 1200px;
+}
+
+.first-nav .logo {
+    display: inline-block;
+    height: 50px;
+    margin: 0px;
+}
+
+.first-nav .logo img {
+    height: 100%;
+}
+
+.first-nav nav {
+    position: absolute;
+    right: 0;
+    top: 20px;
+}
+
+.first-nav nav li {
+    padding: 0 10px;
+    text-align: center;
+}
+
+.second-nav {
+    position: relative;
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.second-nav>nav {
+    height: 50px;
+}
+
+.second-nav>nav>li {
+    /* margin-left: 4%; */
+    line-height: 50px;
+    position: relative;
+    width: 19%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    height: 100%;
+}
+
+.second-nav>nav>li:hover {
+    box-sizing: border-box;
+    border-bottom: 1px solid blue;
+}
+
+.second-nav .sub-menu {
+    display: none;
+    padding-top: 20px;
+    position: absolute;
+    transform: translate(-50%);
+    left: 50%;
+    top: 100%;
+    width: 100%;
+    height: 180px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 35px;
+    z-index: 999;
+}
+
+.second-nav .sub-menu>li {
+    display: block;
+    width: 100%;
+}
+
+.sub_bg {
+    position: absolute;
+    display: none;
+    background-color: #eee;
+    height: 180px;
+    width: 100%;
+    z-index: 998;
+}
+
+.bi-list {
+    font-size: 2em;
+    color: #555;
+    float: right;
+    padding: 4px;
+    display: none;
+}
+
+.mobileMenu {
+    text-align: center;
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    z-index: 9999999;
+}
+
+.mobileMenu .m-top a {
+    color: #fff;
+}
+
+.mobileMenu .m-top {
+    height: 60px;
+    text-align: right;
+    background-color: #777;
+    color: white;
+    font-weight: border;
+}
+
+.mobileMenu li {
+    margin: 3%;
+    font-size: 1.1rem;
+}
+
+.bi-x-lg {
+    font-size: 1.4rem;
+}
+
+
+.mobileMenu h3 {
+    margin: auto;
+    font-size: 1.1rem;
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #777;
+    border-bottom: 1px solid #777;
+}
+
+.mobileMenu h3:first-of-type {
+    margin-top: 10px;
+    border-top: none;
+}
+
+.mobileMenu .m-bottom li {
+    font-size: 1rem;
+    display: block;
+}
+
+
+/* /header */
+
+/* main */
+.banner {
+    position: relative;
+    height: 400px;
+    text-align: center;
+    background-color: #2f374e;
+    color: white;
+    z-index: -1;
+}
+
+.banner img {
+    height: 100%;
+}
+
+.notice {
+    display: inline-block;
+    width: 300px;
+    height: 100px;
+}
+
+.serchForm {
+    text-align: left;
+    margin: 20px auto;
+    height: 60px;
+    line-height: 40px;
+    width: 80%;
+    border: 4px solid #2f374e;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+select,
+input {
+    border: none;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+}
+
+.serchForm select {
+    padding: 10px;
+    width: 100px;
+    height: 100%;
+}
+
+.serchForm input[type="text"] {
+    padding: 10px;
+    width: 55%;
+    height: 100%;
+}
+
+
+.serchForm button {
+    color: white;
+    float: right;
+    width: 60px;
+    height: 100%;
+    border: none;
+    background-color: #2f374e;
+    font-size: 1.8rem;
+}
+
+.contents {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.notice1 {
+    margin-top: 30px;
+}
+
+.notice1 tr {
+    line-height: 40px;
+}
+
+.notice1 tr td:first-of-type {
+    width: 80%;
+    text-align: left;
+}
+
+.notice1 tr:hover {
+    color: #2f374e;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.notice2 img {
+    width: 100%;
+    /* background-image: url("../assets/notice.png"); */
+}
+
+.card-img-top {
+    height: 15rem;
+    object-fit: cover;
+}
+
+.booksBanner {
+    width: 80%;
+    margin: auto;
+}
+
+.booksBanner a {
+    text-align: right;
+}
+
+.booksBannerNav {
+    padding: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border: 1px solid #2f374e;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+.booksBannerNav li {
+    float: left;
+    margin: 0;
+    width: 50%;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.booksBannerNav .active {
+    background-color: #2f374e;
+    color: white;
+}
+
+/* insert user */
+
+.input-form {
+    text-align: left;
+    max-width: 500px;
+
+    margin-top: 80px;
+    padding: 32px;
+
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+
+footer li {
+    font-size: 2rem;
+}
+
+/*side menu*/
+.side_menu {
+    float: left;
+    text-align: left;
+    margin: 30px;
+    width: 20%;
+}
+
+.side_menu li {
+    width: 100%;
+    height: 30px;
+}
+
+/* 로그인 폼 */
+.loginSection {
+    width: 60%;
+    margin: auto;
+}
+
+.loginSection form {
+    margin: auto;
+    width: 450px;
+    padding: 10%;
+}
+
+footer {
+    clear: both;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+
+    .first-nav,
+    .second-nav {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .first-nav nav,
+    .second-nav {
+        display: none;
+    }
+
+    .bi-list {
+        display: block;
+    }
+
+    .serchForm input[type="text"] {
+        width: 35%;
+    }
+
+    .side_menu {
+        display: none;
+    }
+}
