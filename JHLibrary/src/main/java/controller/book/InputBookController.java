@@ -33,7 +33,6 @@ public class InputBookController implements Controller {
         }
         String isbn = request.getParameter("isbn");
 //        String isbn = "9791168473690";
-        System.out.println(isbn);
         String apiURL = "http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbgihyun6580155001&itemIdType=ISBN13&ItemId="
                 + isbn + "&output=js&Cover=Big"; // JSON
                                                  // 결과

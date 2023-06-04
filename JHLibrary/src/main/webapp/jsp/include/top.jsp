@@ -80,7 +80,7 @@
                     <nav class="sub-menu">
                         <li><a href="#">마이페이지</a></li>
                         <li><a href="#">회원관리</a></li>
-                        <li><a href="#">도서관리</a></li>
+                        <li><a href="${pageContext.request.contextPath }/bookManagement.do">도서관리</a></li>
                         <li><a href="#">공지관리</a></li>
                     </nav>
                     </c:if>
@@ -160,7 +160,7 @@
                 <a href="#">
                     <li>회원관리</li>
                 </a>
-                <a href="#">
+                <a href="${pageContext.request.contextPath }/bookManagement.do">
                     <li>도서관리</li>
                 </a>
                 <a href="#">

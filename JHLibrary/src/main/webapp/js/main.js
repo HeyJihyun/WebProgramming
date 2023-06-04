@@ -128,7 +128,12 @@ function inputBook() {
 }
 
 function bookSubmitCheck() {
-  if (document.getElementById("isbn").classList.contains("is-invalid")) {
+  const isbn = document.getElementById("isbn");
+  if (isbn.value === "") {
+    document.getElementById("isbn").classList.add("is-invalid");
+    return false;
+  }
+  if (isbn.classList.contains("is-invalid")) {
     return false;
   }
 }

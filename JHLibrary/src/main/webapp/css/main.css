@@ -399,3 +399,15 @@ footer {
     height: 300px;
     box-shadow: 1px 1px 2px#777;
 }
+/* bookList */
+#bookCards {
+    width: 80%;
+    margin: 30px auto;
+    text-align: left;
+}
+
+
+#bookCards .card img {
+    float: left;
+    margin-right: 30px;
+}

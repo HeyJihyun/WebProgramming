@@ -3,6 +3,8 @@ package biz.book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import biz.common.JDBCUtil;
 
@@ -45,5 +47,42 @@ public class BookDAO {
         } finally {
             JDBCUtil.close(rs, stmt, conn);
         }
+    }
+
+    public List<BookVO> getBookList() {
+
+        List<BookVO> bookList = new ArrayList<BookVO>();
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT * FROM T_BOOK ORDER BY B_NO DESC");
+
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                BookVO book = new BookVO();
+                book.setB_no(rs.getInt("B_NO"));
+                book.setIsbn13(rs.getString("ISBN"));
+                book.setTitle(rs.getString("TITLE"));
+                book.setAuthor(rs.getString("AUTHOR"));
+                book.setPubDate(rs.getString("PUBDATE"));
+                book.setRegDate(rs.getString("REGDATE"));
+                book.setCover(rs.getString("COVER"));
+                book.setCategoryName(rs.getString("CATEGORY_NAME"));
+                book.setPublisher(rs.getString("PUBLISHER"));
+                book.setItemPage(rs.getInt("ITEMPAGE"));
+                book.setDescription(rs.getString("DESCRIPTION"));
+                book.setB_status(rs.getString("B_STATUS"));
+                book.setR_count(rs.getInt("R_COUNT"));
+
+                bookList.add(book);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
+        return bookList;
     }
 }
