@@ -37,7 +37,7 @@ window.onload = function () {
     });
   });
 
-
+  // 비밀번호 확인체크
   let checkPassword = document.getElementById("checkPassword");
   checkPassword.addEventListener("change", function () {
     let password = document.getElementById("password");
@@ -51,6 +51,7 @@ window.onload = function () {
   });
 };
 
+// 아이디 중복체크
 function checkId() {
   var id = document.getElementById("id");
   var xhr = new XMLHttpRequest();
@@ -88,23 +89,46 @@ function checkId() {
   xhr.send(data);
 }
 
+// 회원가입 제출폼 유효성 확인
 function submitForm() {
   let isValidForm = true;
   const fields = ["id", "password", "checkPassword", "name", "phone"];
 
   for (let i = 0; i < fields.length; i++) {
     let field = document.getElementById(fields[i]);
+    const regex = /\d{3}-\d{3,4}-\d{4}/;
 
+    // 빈칸있는지 확인
     if (field.value === null || field.value === "") {
       field.classList.add("is-invalid");
       isValidForm = false;
-    } else if (fields[i] != "id" && fields[i] != "checkPassword") {
+    } else if (fields[i] === "phone" && !regex.test(field.value)) {
+      field.classList.add("is-invalid");
+      isValidForm = false;
+    } else if (fields[i] === "id" || fields[i] === "checkPassword") {
+      if (field.classList.contains("is-invalid")) {
+        isValidForm = false;
+      }
+    } else {
       field.classList.remove("is-invalid");
       field.classList.add("is-valid");
-    } else if (field.classList.contains("is-invalid")) {
-      isValidForm = false;
     }
   }
 
   return isValidForm;
+}
+
+function inputBook() {
+  const isbn = document.getElementById("isbn").value;
+  if (isbn.trim().length === 13) {
+    location.href = "/JHLibrary/inputBook.do?isbn=" + isbn.trim();
+  } else {
+    document.getElementById("isbn").classList.add("is-invalid");
+  }
+}
+
+function bookSubmitCheck() {
+  if (document.getElementById("isbn").classList.contains("is-invalid")) {
+    return false;
+  }
 }

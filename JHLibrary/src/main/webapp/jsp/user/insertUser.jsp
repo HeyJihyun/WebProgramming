@@ -40,10 +40,10 @@
 
         <div class="mb-3">
           <label for="code">핸드폰 번호</label>
-          <input type="tel" class="form-control" id="phone" name="phone" required="" placeholder="010-1234-5678"
-            pattern="([0-9]{3})-?([0-9]{3,4})-?([0-9]{4})$">
+          <input type="tel" class="form-control" id="phone" name="phone" required="" placeholder="010-1234-5678(하이폰(-)포함)"
+            pattern="([0-9]{3})-([0-9]{3,4})-([0-9]{4})$">
           <div class="invalid-feedback">
-            핸드폰 번호를 입력해 주세요.
+            핸드폰 번호를 확인해 주세요.(하이폰(-)포함)
           </div>
         </div>
         <hr class="mb-4">

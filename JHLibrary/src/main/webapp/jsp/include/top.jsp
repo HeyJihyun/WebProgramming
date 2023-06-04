@@ -4,21 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <title>JH도서관</title>
-    <link rel="icon" href="/JHLibrary/assets/favicon.png">
+    <link rel="icon" href="${pageContext.request.contextPath }/assets/favicon.png">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/JHLibrary/css/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/main.css">
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-    <script src="/JHLibrary/js/main.js"></script>
+    <script src="${pageContext.request.contextPath }/js/main.js"></script>
 </head>
 <body>
 <header>
         <div class="menu_wrap">
             <div class="first-nav">
-                <h1 class="logo"><a href="/JHLibrary"><img src="/JHLibrary/assets/logo.png" alt="JH도서관"></a></h1>
+                <h1 class="logo"><a href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/assets/logo.png" alt="JH도서관"></a></h1>
                 <i class="bi bi-list"></i>
                 <nav>
                     <c:if test = "${empty user}">
@@ -53,7 +53,7 @@
                     <a href="#">도서관이용</a>
                     <nav class="sub-menu">
                     <c:if test = "${empty user}">
-                    <li><a href="/JHLibrary/login.do">로그인</a></li>
+                    <li><a href="${pageContext.request.contextPath }/login.do">로그인</a></li>
                     <li><a href="${ pageContext.request.contextPath }/insertUserPage.do">회원가입</a></li>
                     </c:if>
                     <li><a href="#">도서대출</a></li>
@@ -66,7 +66,7 @@
                 </nav>
                 </li>
                 <li>
-                    <c:if test = "${user.grade == 'user'}">
+                    <c:if test = "${user.grade == 'user'  or empty user}">
                     <a href="#">내서재</a>
                     <nav class="sub-menu">
                         <li><a href="#">마이페이지</a></li>
@@ -137,7 +137,7 @@
                 <a href="#">
                     <li>희망도서신청</li>
                 </a>
-                <c:if test = "${user.grade == 'user'}">
+                <c:if test = "${user.grade == 'user' or empty user}">
                 <h3>내서재</h3>
                 <a href="#">
                     <li>마이페이지</li>
