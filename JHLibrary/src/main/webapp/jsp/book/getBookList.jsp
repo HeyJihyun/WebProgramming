@@ -2,8 +2,8 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <jsp:include page="/jsp/include/top.jsp" />
         <section id="bookCards">
-            <article class="serchArticle">
-                <form class="serchForm" action="${pageContext.request.contextPath}/serch.do" method="post">
+            <article class="searchArticle">
+                <form class="searchForm" action="${pageContext.request.contextPath}/searchBook.do" method="post">
                     <select name="search_item" id="">
                         <option value="title" selected="">제목</option>
                         <option value="author">저자</option>
@@ -15,8 +15,10 @@
                     </button>
                 </form>
             </article>
+            <c:if test="${user.grade == 'admin'}">
             <button type="button" class="btn btn-primary mb-3"
                 onclick="location.href='${pageContext.request.contextPath}/inputBook.do'">책 등록</button>
+            </c:if>
             <div class="row">
                 <c:forEach var="book" items="${bookList}">
                     <div class="col-12 card mb-3">
@@ -35,13 +37,13 @@
                             </c:if>
                             ${book.ableRantalCnt } / ${book.count }
                             </div>
-                            총 대여회수 : ${book.r_count}<br>
+                            총 대여수 : ${book.r_count}
                             <c:if test="${user.grade == 'admin'}">
-                                <a href="#" class="card-link">도서수정</a>
+                                <a href="${ pageContext.request.contextPath }/updateBookPage.do?isbn=${book.isbn13}" class="card-link">도서수정</a>
                             </c:if>
                         </div>
                     </div>
-                    </c:forEach>
+                 </c:forEach>
             </div>
         </section>
         <jsp:include page="/jsp/include/bottom.jsp" />

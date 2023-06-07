@@ -42,7 +42,8 @@ public class UserDAO {
     }
 
     // 회원가입
-    public void insertUser(UserVO vo) {
+    public int insertUser(UserVO vo) {
+        int result = 0;
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO T_USER(ID, PWD, NAME, PHONE) VALUES(?, ?, ?, ?)");
 
@@ -54,12 +55,14 @@ public class UserDAO {
             stmt.setString(3, vo.getName());
             stmt.setString(4, vo.getPhone());
 
-            stmt.executeUpdate();
+            result = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             JDBCUtil.close(rs, stmt, conn);
         }
+
+        return result;
     }
 
     // 아이디 중복 확인

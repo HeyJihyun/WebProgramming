@@ -36,9 +36,10 @@ public class InsertBookController implements Controller {
         book.setDescription(request.getParameter("description"));
 
         BookDAO dao = new BookDAO();
-        dao.insertBook(book);
+        int result = dao.insertBook(book);
 
-        return "/jsp/book/insertBook.jsp";
-
+        request.setAttribute("msg", result + "권의 책이 등록되었습니다.");
+        request.setAttribute("url", "inputBook.do");
+        return "/jsp/alert.jsp";
     }
 }

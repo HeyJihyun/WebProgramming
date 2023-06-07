@@ -9,7 +9,7 @@ import biz.book.BookDAO;
 import biz.book.BookVO;
 import controller.Controller;
 
-public class BookManagementController implements Controller {
+public class GetBookListController implements Controller {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
@@ -19,6 +19,6 @@ public class BookManagementController implements Controller {
 
         request.setAttribute("bookList", bookList);
 
-        return "/jsp/book/bookManagement.jsp";
+        return "/jsp/book/getBookList.jsp";
     }
 }

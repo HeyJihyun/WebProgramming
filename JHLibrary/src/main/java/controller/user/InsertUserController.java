@@ -29,7 +29,9 @@ public class InsertUserController implements Controller {
         UserDAO dao = new UserDAO();
         dao.insertUser(vo);
 
-        return "/jsp/user/login.jsp";
+        request.setAttribute("msg", "회원가입이 완료되었습니다.");
+        request.setAttribute("url", "login.do");
+        return "/jsp/alert.jsp";
 
     }
 }

@@ -3,9 +3,13 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import controller.book.BookManagementController;
+import controller.book.DeleteBookController;
+import controller.book.GetBookListController;
 import controller.book.InputBookController;
 import controller.book.InsertBookController;
+import controller.book.SearchBookController;
+import controller.book.UpdateBookController;
+import controller.book.UpdateBookPageController;
 import controller.user.IdCheckController;
 import controller.user.InsertUserController;
 import controller.user.InsertUserPageController;
@@ -28,7 +32,11 @@ public class HandlerMapping {
         mappings.put("/idCheck.do", new IdCheckController());
         mappings.put("/inputBook.do", new InputBookController());
         mappings.put("/insertBook.do", new InsertBookController());
-        mappings.put("/bookManagement.do", new BookManagementController());
+        mappings.put("/getBookList.do", new GetBookListController());
+        mappings.put("/searchBook.do", new SearchBookController());
+        mappings.put("/updateBookPage.do", new UpdateBookPageController());
+        mappings.put("/deleteBook.do", new DeleteBookController());
+        mappings.put("/updateBook.do", new UpdateBookController());
     }
 
     public Controller getController(String path) {

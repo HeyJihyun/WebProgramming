@@ -8,12 +8,12 @@
         <div class="notice"></div>
     </section>
     <section class="contents">
-        <article class="serchArticle">
-            <form class="serchForm" action="" method="post">
+        <article class="searchArticle">
+            <form class="searchForm" action="${pageContext.request.contextPath}/searchBook.do" method="post">
                 <select name="search_item" id="">
-                    <option value="" selected>제목</option>
-                    <option value="">저자</option>
-                    <option value="">출판사</option>
+                    <option value="title" selected="">제목</option>
+                    <option value="author">저자</option>
+                    <option value="publisher">출판사</option>
                 </select>
                 <input type="text" name="search_txt" placeholder="찾으시는 검색어를 입력하세요.">
                 <button type="submit">

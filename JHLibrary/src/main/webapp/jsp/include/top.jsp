@@ -44,7 +44,7 @@
                 <li>
                     <a href="#">도서정보</a>
                     <nav class="sub-menu">
-                <li><a href="#">도서검색</a></li>
+                <li><a href="${pageContext.request.contextPath }/getBookList.do">도서검색</a></li>
                 <li><a href="#">신간도서</a></li>
                 <li><a href="#">인기도서</a></li>
                 </nav>
@@ -80,7 +80,7 @@
                     <nav class="sub-menu">
                         <li><a href="#">마이페이지</a></li>
                         <li><a href="#">회원관리</a></li>
-                        <li><a href="${pageContext.request.contextPath }/bookManagement.do">도서관리</a></li>
+                        <li><a href="${pageContext.request.contextPath }/getBookList.do">도서관리</a></li>
                         <li><a href="#">공지관리</a></li>
                     </nav>
                     </c:if>
@@ -112,7 +112,7 @@
                     <li>도서관 소개</li>
                 </a>
                 <h3>도서정보</h3>
-                <a href="#">
+                <a href="${pageContext.request.contextPath }/getBookList.do">
                     <li>도서검색</li>
                 </a>
                 <a href="#">
@@ -160,7 +160,7 @@
                 <a href="#">
                     <li>회원관리</li>
                 </a>
-                <a href="${pageContext.request.contextPath }/bookManagement.do">
+                <a href="${pageContext.request.contextPath }/getBookList.do">
                     <li>도서관리</li>
                 </a>
                 <a href="#">
