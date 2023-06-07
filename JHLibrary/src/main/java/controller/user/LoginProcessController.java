@@ -45,7 +45,9 @@ public class LoginProcessController implements Controller {
             System.out.println(session.getAttribute("user"));
             return "main.do";
         } else {
-            return "login.do";
+            request.setAttribute("msg", "아이디 또는 비밀번호가 맞지 않습니다.");
+            request.setAttribute("url", "login.do");
+            return "/jsp/alert.jsp";
         }
 
     }

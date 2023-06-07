@@ -401,13 +401,31 @@ footer {
 }
 /* bookList */
 #bookCards {
-    width: 80%;
+    width: 1000px;
     margin: 30px auto;
     text-align: left;
 }
 
+#bookCards .unable {
+    color: red;
+}
+
+#bookCards .able {
+    color: blue;
+}
 
 #bookCards .card img {
     float: left;
     margin-right: 30px;
+}
+#bookCards button {
+    margin-left: 920px;
+}
+
+#bookCards .card-title {
+    margin-top: 5px;
+}
+
+#bookCards .card-link {
+    text-align: right;
 }

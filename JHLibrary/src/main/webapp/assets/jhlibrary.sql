@@ -14,8 +14,12 @@ CREATE TABLE T_BOOK (
        R_COUNT       NUMBER DEFAULT 0
 );
 
-alter table t_book modify regdate VARCHAR2(12) default TO_CHAR(SYSDATE, 'YYYY-MM-DD');   
-update t_book set regdate = TO_CHAR(SYSDATE, 'YYYY-MM-DD');
+ALTER TABLE T_BOOK MODIFY
+       REGDATE VARCHAR2(12) DEFAULT TO_CHAR(SYSDATE, 'YYYY-MM-DD');
+
+UPDATE T_BOOK
+   SET
+       REGDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD');
 
 INSERT INTO T_BOOK (
        B_NO,
@@ -43,7 +47,37 @@ INSERT INTO T_BOOK (
 
 CREATE SEQUENCE SEQ_T_BOOK_NO INCREMENT BY 1 START WITH 1 NOCYCLE NOCACHE;
 
-select * from t_book order by b_no desc;
-select * from t_user;
+SELECT *
+  FROM T_BOOK
+ ORDER BY B_NO DESC;
 
-select isbn, title, AUTHOR, pubdate, regdate, cover, category_name, publisher, itempage, description, b_status, sum(r_count), count(isbn), count(b_status) from t_book group by isbn, title, AUTHOR, pubdate, regdate, cover, category_name, publisher, itempage, description, b_status ;
+update t_book set b_status = '샘플' where b_no = 6;
+
+SELECT *
+  FROM T_USER;
+
+SELECT ISBN,
+       TITLE,
+       AUTHOR,
+       PUBDATE,
+       REGDATE,
+       COVER,
+       CATEGORY_NAME,
+       PUBLISHER,
+       ITEMPAGE,
+       DESCRIPTION,
+       SUM(R_COUNT) as r_total,
+       COUNT(ISBN) as count,
+       sum(case when b_status = '가능' then 1 else 0 end) as ableCount
+  FROM T_BOOK
+ GROUP BY ISBN,
+          TITLE,
+          AUTHOR,
+          PUBDATE,
+          REGDATE,
+          COVER,
+          CATEGORY_NAME,
+          PUBLISHER,
+          ITEMPAGE,
+          DESCRIPTION
+ 

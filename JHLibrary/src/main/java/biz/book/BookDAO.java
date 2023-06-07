@@ -13,7 +13,9 @@ public class BookDAO {
     private PreparedStatement stmt;
     private ResultSet rs;
 
-    public void insertBook(BookVO book) {
+    // 도서등록
+    public int insertBook(BookVO book) {
+        int result = 0;
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO T_BOOK (");
         sql.append("       B_NO,");
@@ -41,19 +43,29 @@ public class BookDAO {
             stmt.setInt(8, book.getItemPage());
             stmt.setString(9, book.getDescription());
 
-            stmt.executeUpdate();
+            result = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             JDBCUtil.close(rs, stmt, conn);
         }
+        return result;
     }
 
     public List<BookVO> getBookList() {
 
         List<BookVO> bookList = new ArrayList<BookVO>();
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT * FROM T_BOOK ORDER BY B_NO DESC");
+        sql.append("SELECT ISBN, TITLE, AUTHOR, PUBDATE, ");
+        sql.append("       REGDATE, COVER, CATEGORY_NAME, ");
+        sql.append("       PUBLISHER, ITEMPAGE, DESCRIPTION, ");
+        sql.append("       SUM(R_COUNT) AS R_TOTAL, ");
+        sql.append("       COUNT(ISBN)  AS COUNT, ");
+        sql.append("       SUM(CASE WHEN B_STATUS = '가능' THEN 1 ELSE 0 END) AS ABLE_COUNT ");
+        sql.append("  FROM T_BOOK ");
+        sql.append(" GROUP BY ISBN, TITLE, AUTHOR, PUBDATE, ");
+        sql.append("          REGDATE, COVER, CATEGORY_NAME, ");
+        sql.append("          PUBLISHER, ITEMPAGE, DESCRIPTION");
 
         try {
             conn = JDBCUtil.getConnection();
@@ -61,8 +73,7 @@ public class BookDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                BookVO book = new BookVO();
-                book.setB_no(rs.getInt("B_NO"));
+                BookManagemnetVO book = new BookManagemnetVO();
                 book.setIsbn13(rs.getString("ISBN"));
                 book.setTitle(rs.getString("TITLE"));
                 book.setAuthor(rs.getString("AUTHOR"));
@@ -73,8 +84,9 @@ public class BookDAO {
                 book.setPublisher(rs.getString("PUBLISHER"));
                 book.setItemPage(rs.getInt("ITEMPAGE"));
                 book.setDescription(rs.getString("DESCRIPTION"));
-                book.setB_status(rs.getString("B_STATUS"));
-                book.setR_count(rs.getInt("R_COUNT"));
+                book.setR_count(rs.getInt("R_TOTAL"));
+                book.setCount(rs.getInt("COUNT"));
+                book.setAbleRantalCnt(rs.getInt("ABLE_COUNT"));
 
                 bookList.add(book);
             }
