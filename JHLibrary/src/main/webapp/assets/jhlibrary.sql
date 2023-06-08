@@ -51,7 +51,10 @@ SELECT *
   FROM T_BOOK
  ORDER BY B_NO DESC;
 
-update t_book set b_status = '샘플' where b_no = 6;
+UPDATE T_BOOK
+   SET
+       B_STATUS = '분실'
+ WHERE B_STATUS = '샘플';
 
 SELECT *
   FROM T_USER;
@@ -66,9 +69,16 @@ SELECT ISBN,
        PUBLISHER,
        ITEMPAGE,
        DESCRIPTION,
-       SUM(R_COUNT) as r_total,
-       COUNT(ISBN) as count,
-       sum(case when b_status = '가능' then 1 else 0 end) as ableCount
+       SUM(R_COUNT) AS R_TOTAL,
+       COUNT(ISBN)  AS COUNT,
+       SUM(
+              CASE
+                     WHEN B_STATUS = '가능' THEN
+                            1
+                     ELSE
+                            0
+              END
+       )            AS ABLE_COUNT
   FROM T_BOOK
  GROUP BY ISBN,
           TITLE,
@@ -80,4 +90,6 @@ SELECT ISBN,
           PUBLISHER,
           ITEMPAGE,
           DESCRIPTION
- 
+order by title;
+
+COMMIT;

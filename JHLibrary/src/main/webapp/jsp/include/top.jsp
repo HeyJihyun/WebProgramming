@@ -79,7 +79,7 @@
                     <a href="#">도서관관리</a>
                     <nav class="sub-menu">
                         <li><a href="#">마이페이지</a></li>
-                        <li><a href="#">회원관리</a></li>
+                        <li><a href="${ pageContext.request.contextPath }/getUserList.do">회원관리</a></li>
                         <li><a href="${pageContext.request.contextPath }/getBookList.do">도서관리</a></li>
                         <li><a href="#">공지관리</a></li>
                     </nav>
@@ -157,7 +157,7 @@
                 <a href="#">
                     <li>마이페이지</li>
                 </a>
-                <a href="#">
+                <a href="${ pageContext.request.contextPath }/getUserList.do">
                     <li>회원관리</li>
                 </a>
                 <a href="${pageContext.request.contextPath }/getBookList.do">

@@ -77,7 +77,7 @@ public class BookDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                BookManagemnetVO book = new BookManagemnetVO();
+                BookManagementVO book = new BookManagementVO();
                 book.setIsbn13(rs.getString("ISBN"));
                 book.setTitle(rs.getString("TITLE"));
                 book.setAuthor(rs.getString("AUTHOR"));
@@ -123,7 +123,7 @@ public class BookDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                BookManagemnetVO book = new BookManagemnetVO();
+                BookManagementVO book = new BookManagementVO();
                 book.setIsbn13(rs.getString("ISBN"));
                 book.setTitle(rs.getString("TITLE"));
                 book.setAuthor(rs.getString("AUTHOR"));

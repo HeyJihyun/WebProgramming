@@ -3,6 +3,8 @@ package biz.user;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import biz.common.JDBCUtil;
 
@@ -88,6 +90,33 @@ public class UserDAO {
         }
 
         return result;
+    }
+
+    // 유저 정보 불러오기
+    public List<UserVO> getUserList() {
+        String sql = "SELECT * FROM T_USER ORDER BY grade, ID";
+
+        List<UserVO> userList = new ArrayList<>();
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String name = rs.getString(3);
+                String phone = rs.getString(4);
+                String grade = rs.getString(5);
+                userList.add(new UserVO(id, null, name, phone, grade));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
+
+        return userList;
     }
 
 }
