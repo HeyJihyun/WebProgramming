@@ -1,3 +1,4 @@
+-- t_book테이블 생성
 CREATE TABLE T_BOOK (
        B_NO          NUMBER PRIMARY KEY,
        ISBN          VARCHAR2(13) NOT NULL,
@@ -14,32 +15,58 @@ CREATE TABLE T_BOOK (
        R_COUNT       NUMBER DEFAULT 0
 );
 
+CREATE SEQUENCE SEQ_T_BOOK_NO INCREMENT BY 1 START WITH 1 NOCYCLE NOCACHE;
+
+-- t_rental 테이블 생성
 CREATE TABLE T_RENTAL (
        R_NO        NUMBER DEFAULT SEQ_T_RENT_NO.NEXTVAL PRIMARY KEY,
        U_ID        VARCHAR2(255) NOT NULL,
-       B_NO        NUMBER NOT NULL,
+       B_NO        NUMBER NOT NULL UNIQUE,
        RENTAL_DATE DATE DEFAULT SYSDATE,
        RETURN_DATE DATE DEFAULT SYSDATE + 14,
        EXTENSION   NUMBER(1) DEFAULT 1,
-       CONSTRAINT FK_U_ID FOREIGN KEY(U_ID) REFERENCES T_USER(ID),
-       CONSTRAINT FK_B_NO FOREIGN KEY(B_NO) REFERENCES T_BOOK(B_NO)
+       CONSTRAINT FK_U_ID FOREIGN KEY ( U_ID )
+              REFERENCES T_USER ( ID ),
+       CONSTRAINT FK_B_NO FOREIGN KEY ( B_NO )
+              REFERENCES T_BOOK ( B_NO )
 );
-insert into T_RENTAL(U_ID, b_no) values('aaa', (select min(b_no) from t_book where isbn = '9791197889585' and b_status = '가능'));
-update t_book set b_status = '대여중' where b_no = (select min(b_no) from t_book where isbn = '9791197889585' and b_status = '가능');
-select * from t_rental;
-
-
-drop table t_rental;
 
 CREATE SEQUENCE SEQ_T_RENT_NO INCREMENT BY 1 START WITH 1 NOCYCLE NOCACHE;
 
-ALTER TABLE T_BOOK MODIFY
-       REGDATE VARCHAR2(12) DEFAULT TO_CHAR(SYSDATE, 'YYYY-MM-DD');
+
+-- 도서 대여 쿼리
+INSERT INTO T_RENTAL (
+       U_ID,
+       B_NO
+) VALUES (
+       'aaa',
+       (
+              SELECT MIN(B_NO)
+                FROM T_BOOK
+               WHERE ISBN = '9791197889585'
+                 AND B_STATUS = '가능'
+       )
+);
 
 UPDATE T_BOOK
-   SET
-       REGDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD');
+   SET B_STATUS = '대여중',
+       R_COUNT = R_COUNT + 1
+ WHERE B_NO = (
+       SELECT MIN(B_NO)
+         FROM T_BOOK
+        WHERE ISBN = '9791197889585'
+          AND B_STATUS = '가능'
+);
 
+-- 도서대여 쿼리 종료
+
+
+SELECT *
+  FROM T_RENTAL;
+
+
+
+-- 도서 등록 쿼리
 INSERT INTO T_BOOK (
        B_NO,
        ISBN,
@@ -64,16 +91,9 @@ INSERT INTO T_BOOK (
        ?
 );
 
-CREATE SEQUENCE SEQ_T_BOOK_NO INCREMENT BY 1 START WITH 1 NOCYCLE NOCACHE;
-
 SELECT *
   FROM T_BOOK
  ORDER BY B_NO DESC;
-
-UPDATE T_BOOK
-   SET
-       B_STATUS = '분실'
- WHERE B_STATUS = '샘플';
 
 SELECT *
   FROM T_USER;
@@ -113,8 +133,19 @@ SELECT ISBN,
 
 COMMIT;
 
-
-
 SELECT *
   FROM T_USER
  ORDER BY ID;
+
+SELECT R_NO, R.B_NO, TITLE, AUTHOR, COVER, TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD') AS RENTAL_DATE, TO_CHAR(RETURN_DATE, 'YYYY-MM-DD') AS RETURN_DATE, EXTENSION
+  FROM T_BOOK   B, T_RENTAL R
+ WHERE B.B_NO = R.B_NO
+   AND U_ID = 'aaa';
+   
+UPDATE T_RENTAL
+   SET EXTENSION = 0,
+       RETURN_DATE = RETURN_DATE + 7
+ WHERE R_NO = 1;
+select * from t_rental;
+commit;
+         
