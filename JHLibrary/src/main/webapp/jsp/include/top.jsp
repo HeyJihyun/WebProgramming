@@ -70,7 +70,7 @@
                     <a href="#">내서재</a>
                     <nav class="sub-menu">
                         <li><a href="#">마이페이지</a></li>
-                        <li><a href="#">대출현황</a></li>
+                        <li><a href="${ pageContext.request.contextPath }/rentalList.do">대출현황</a></li>
                         <li><a href="#">도서예약</a></li>
                         <li><a href="#">내 문의</a></li>
                     </nav>
@@ -142,7 +142,7 @@
                 <a href="#">
                     <li>마이페이지</li>
                 </a>
-                <a href="#">
+                <a href="${ pageContext.request.contextPath }/rentalList.do">
                     <li>대출현황</li>
                 </a>
                 <a href="#">

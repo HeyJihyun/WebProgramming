@@ -19,8 +19,9 @@ public class RentalBookController implements Controller {
         String isbn = request.getParameter("isbn");
 
         RentalDAO dao = new RentalDAO();
-        dao.insertRental(id, isbn);
-
-        return "index.jsp";
+        int result = dao.insertRental(id, isbn);
+        request.setAttribute("msg", result + "권의 책이 대여완료 되었습니다.");
+        request.setAttribute("url", "getBookList.do");
+        return "/jsp/alert.jsp";
     }
 }

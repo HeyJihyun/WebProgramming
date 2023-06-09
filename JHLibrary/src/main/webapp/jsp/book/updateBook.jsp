@@ -21,7 +21,7 @@
                                 도서상태:
                                 <select class="b_status" name="b_status" id="">
                                     <option value="가능" <c:if test="${book.b_status eq '가능'}">selected</c:if>>가능</option>
-                                    <option value="대여중" <c:if test="${book.b_status eq '대여중'}">selected</c:if>>대여중
+                                    <option value="대여중" <c:if test="${book.b_status eq '대여중'}">selected</c:if> disabled>대여중
                                     </option>
                                     <option value="훼손" <c:if test="${book.b_status eq '훼손'}">selected</c:if>>훼손</option>
                                     <option value="분실" <c:if test="${book.b_status eq '분실'}">selected</c:if>>분실</option>

@@ -443,3 +443,24 @@ footer {
     width: 1000px;
     margin: auto;
 }
+
+.lentalList{
+    text-align:left;
+    width: 1000px;
+    margin: 30px auto;
+}
+
+.lentalList img{
+    height: 300px;
+    margin-left: 0px;
+    
+}
+
+.lentalList hr{
+    margin-bottom: 10px;
+}
+
+.lentalList button{
+    width: 42%;
+    padding: 5px 0;
+}

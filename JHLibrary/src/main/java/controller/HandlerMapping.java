@@ -10,7 +10,10 @@ import controller.book.InsertBookController;
 import controller.book.SearchBookController;
 import controller.book.UpdateBookController;
 import controller.book.UpdateBookPageController;
+import controller.rental.ExtensionController;
 import controller.rental.RentalBookController;
+import controller.rental.RentalListController;
+import controller.rental.ReturnRentalController;
 import controller.user.IdCheckController;
 import controller.user.InsertUserController;
 import controller.user.InsertUserPageController;
@@ -41,6 +44,9 @@ public class HandlerMapping {
         mappings.put("/deleteBook.do", new DeleteBookController());
         mappings.put("/updateBook.do", new UpdateBookController());
         mappings.put("/rentalBook.do", new RentalBookController());
+        mappings.put("/rentalList.do", new RentalListController());
+        mappings.put("/extension.do", new ExtensionController());
+        mappings.put("/returnRental.do", new ReturnRentalController());
     }
 
     public Controller getController(String path) {

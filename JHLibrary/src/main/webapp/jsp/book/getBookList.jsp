@@ -41,7 +41,7 @@
                             <c:if test="${user.grade == 'admin'}">
                                 <a href="${ pageContext.request.contextPath }/updateBookPage.do?isbn=${book.isbn13}" class="card-link">도서수정</a>
                             </c:if>
-                            <c:if test="${user.grade == 'user' && book.count - book.ableRantalCnt == book.count}">
+                            <c:if test="${user.grade == 'user' && book.count - book.ableRantalCnt < book.count }">
                                 <a href="${ pageContext.request.contextPath }/rentalBook.do?isbn=${book.isbn13}" class="card-link">대여하기</a>
                             </c:if>
                         </div>

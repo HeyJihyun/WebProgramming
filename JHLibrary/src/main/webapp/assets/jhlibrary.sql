@@ -14,6 +14,25 @@ CREATE TABLE T_BOOK (
        R_COUNT       NUMBER DEFAULT 0
 );
 
+CREATE TABLE T_RENTAL (
+       R_NO        NUMBER DEFAULT SEQ_T_RENT_NO.NEXTVAL PRIMARY KEY,
+       U_ID        VARCHAR2(255) NOT NULL,
+       B_NO        NUMBER NOT NULL,
+       RENTAL_DATE DATE DEFAULT SYSDATE,
+       RETURN_DATE DATE DEFAULT SYSDATE + 14,
+       EXTENSION   NUMBER(1) DEFAULT 1,
+       CONSTRAINT FK_U_ID FOREIGN KEY(U_ID) REFERENCES T_USER(ID),
+       CONSTRAINT FK_B_NO FOREIGN KEY(B_NO) REFERENCES T_BOOK(B_NO)
+);
+insert into T_RENTAL(U_ID, b_no) values('aaa', (select min(b_no) from t_book where isbn = '9791197889585' and b_status = '가능'));
+update t_book set b_status = '대여중' where b_no = (select min(b_no) from t_book where isbn = '9791197889585' and b_status = '가능');
+select * from t_rental;
+
+
+drop table t_rental;
+
+CREATE SEQUENCE SEQ_T_RENT_NO INCREMENT BY 1 START WITH 1 NOCYCLE NOCACHE;
+
 ALTER TABLE T_BOOK MODIFY
        REGDATE VARCHAR2(12) DEFAULT TO_CHAR(SYSDATE, 'YYYY-MM-DD');
 
@@ -90,6 +109,12 @@ SELECT ISBN,
           PUBLISHER,
           ITEMPAGE,
           DESCRIPTION
-order by title;
+ ORDER BY TITLE;
 
 COMMIT;
+
+
+
+SELECT *
+  FROM T_USER
+ ORDER BY ID;
