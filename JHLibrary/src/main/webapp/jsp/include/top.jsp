@@ -45,8 +45,8 @@
                     <a href="#">도서정보</a>
                     <nav class="sub-menu">
                 <li><a href="${pageContext.request.contextPath }/getBookList.do">도서검색</a></li>
-                <li><a href="#">신간도서</a></li>
-                <li><a href="#">인기도서</a></li>
+                <li><a href="${pageContext.request.contextPath }/getBookList.do?sort=pubdate desc">신간도서</a></li>
+                <li><a href="${pageContext.request.contextPath }/getBookList.do?sort=r_total desc">인기도서</a></li>
                 </nav>
                 </li>
                 <li>
@@ -69,7 +69,7 @@
                     <c:if test = "${user.grade == 'user'  or empty user}">
                     <a href="#">내서재</a>
                     <nav class="sub-menu">
-                        <li><a href="#">마이페이지</a></li>
+                        <li><a href="${ pageContext.request.contextPath }/updateUserPage.do">회원정보수정</a></li>
                         <li><a href="${ pageContext.request.contextPath }/rentalList.do">대출현황</a></li>
                         <li><a href="#">도서예약</a></li>
                         <li><a href="#">내 문의</a></li>
@@ -78,7 +78,7 @@
                     <c:if test = "${user.grade == 'admin'}">
                     <a href="#">도서관관리</a>
                     <nav class="sub-menu">
-                        <li><a href="#">마이페이지</a></li>
+                        <li><a href="${ pageContext.request.contextPath }/updateUserPage.do">회원정보수정</a></li>
                         <li><a href="${ pageContext.request.contextPath }/getUserList.do">회원관리</a></li>
                         <li><a href="${pageContext.request.contextPath }/getBookList.do">도서관리</a></li>
                         <li><a href="#">공지관리</a></li>
@@ -139,8 +139,8 @@
                 </a>
                 <c:if test = "${user.grade == 'user' or empty user}">
                 <h3>내서재</h3>
-                <a href="#">
-                    <li>마이페이지</li>
+                <a href="${ pageContext.request.contextPath }/updateUserPage.do">
+                    <li>회원정보수정</li>
                 </a>
                 <a href="${ pageContext.request.contextPath }/rentalList.do">
                     <li>대출현황</li>
@@ -154,8 +154,8 @@
                 </c:if>
                 <c:if test = "${user.grade == 'admin'}">
                 <h3>도서관관리</h3>
-                <a href="#">
-                    <li>마이페이지</li>
+                <a href="${ pageContext.request.contextPath }/updateUserPage.do">
+                    <li>회원정보수정</li>
                 </a>
                 <a href="${ pageContext.request.contextPath }/getUserList.do">
                     <li>회원관리</li>

@@ -14,6 +14,8 @@ public class LoginOutController implements Controller {
         HttpSession session = request.getSession();
         session.invalidate();
 
-        return "login.do";
+        request.setAttribute("msg", "로그아웃 되었습니다.");
+        request.setAttribute("url", "login.do");
+        return "/jsp/alert.jsp";
     }
 }

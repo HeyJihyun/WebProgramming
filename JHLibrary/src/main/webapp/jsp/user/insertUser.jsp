@@ -47,7 +47,7 @@
           <input type="tel" class="form-control" id="phone" name="phone" required="" placeholder="010-1234-5678(하이폰(-)포함)"
             pattern="([0-9]{3})-([0-9]{3,4})-([0-9]{4})$">
           <div class="invalid-feedback">
-            핸드폰 번호를 확인해 주세요.(하이폰(-)포함)
+            핸드폰 번호를 확인해 주세요.(하이픈(-)포함)
           </div>
         </div>
         <hr class="mb-4">

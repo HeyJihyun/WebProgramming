@@ -102,7 +102,12 @@ public class BookDAO {
         return bookList;
     }
 
+    // 전체 도서 리스트
     public List<BookVO> getBookList() {
+        return getBookList("title");
+    }
+
+    public List<BookVO> getBookList(String sort) {
 
         List<BookVO> bookList = new ArrayList<BookVO>();
         StringBuilder sql = new StringBuilder();
@@ -116,7 +121,7 @@ public class BookDAO {
         sql.append(" GROUP BY ISBN, TITLE, AUTHOR, PUBDATE, ");
         sql.append("          REGDATE, COVER, CATEGORY_NAME, ");
         sql.append("          PUBLISHER, ITEMPAGE, DESCRIPTION");
-        sql.append(" ORDER BY TITLE");
+        sql.append(" ORDER BY " + sort);
         try {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(sql.toString());
@@ -148,6 +153,7 @@ public class BookDAO {
         return bookList;
     }
 
+    // isbn이 동일한 책 리스트
     public List<BookVO> getBook(String isbn) {
         List<BookVO> bookList = new ArrayList<BookVO>();
         StringBuilder sql = new StringBuilder();

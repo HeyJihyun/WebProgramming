@@ -20,7 +20,11 @@ import controller.user.InsertUserPageController;
 import controller.user.LoginController;
 import controller.user.LoginOutController;
 import controller.user.LoginProcessController;
+import controller.user.deleteUserController;
 import controller.user.getUserListController;
+import controller.user.updateGradeController;
+import controller.user.updateUserController;
+import controller.user.updateUserPageController;
 
 public class HandlerMapping {
 
@@ -47,6 +51,10 @@ public class HandlerMapping {
         mappings.put("/rentalList.do", new RentalListController());
         mappings.put("/extension.do", new ExtensionController());
         mappings.put("/returnRental.do", new ReturnRentalController());
+        mappings.put("/updateUserPage.do", new updateUserPageController());
+        mappings.put("/updateUser.do", new updateUserController());
+        mappings.put("/updateGrade.do", new updateGradeController());
+        mappings.put("/deleteUser.do", new deleteUserController());
     }
 
     public Controller getController(String path) {

@@ -14,9 +14,15 @@ public class GetBookListController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 
-        BookDAO dao = new BookDAO();
-        List<BookVO> bookList = dao.getBookList();
+        String sort = request.getParameter("sort");
 
+        BookDAO dao = new BookDAO();
+        List<BookVO> bookList = null;
+        if (sort == null) {
+            bookList = dao.getBookList();
+        } else {
+            bookList = dao.getBookList(sort);
+        }
         request.setAttribute("bookList", bookList);
 
         return "/jsp/book/getBookList.jsp";

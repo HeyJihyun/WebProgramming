@@ -22,7 +22,11 @@
                             <td>${user.name}</td>
                             <td>${user.phone}</td>
                             <td>${user.grade}</td>
-                            <td><input type="button" value="관리자로 임명"> <input type="button" value="탈퇴"></td>
+                            <td>
+                            <c:if test = "${user.grade == 'user' }">
+                            <a href = "${pageContext.request.contextPath }/updateGrade.do?id=${user.id}"><input type="button" value="관리자로 임명"> </a>
+                            </c:if>
+                            <a href = "${pageContext.request.contextPath }/deleteUser.do?id=${user.id}"><input type="button" value="탈퇴"> </a>
                         </tr>
                     </c:forEach>
                 </tbody>
