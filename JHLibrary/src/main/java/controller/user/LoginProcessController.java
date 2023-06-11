@@ -42,7 +42,6 @@ public class LoginProcessController implements Controller {
         if (dao.getUser(vo) != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", vo);
-            System.out.println(session.getAttribute("user"));
             return "main.do";
         } else {
             request.setAttribute("msg", "아이디 또는 비밀번호가 맞지 않습니다.");

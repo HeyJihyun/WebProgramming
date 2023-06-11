@@ -17,7 +17,6 @@ public class UserDAO {
     public UserVO getUser(UserVO vo) {
 
         String sql = "SELECT * FROM T_USER WHERE ID = ? AND PWD = ?";
-        UserVO user = null;
 
         try {
             conn = JDBCUtil.getConnection();
@@ -28,7 +27,6 @@ public class UserDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                user = new UserVO();
                 vo.setName(rs.getString("NAME"));
                 vo.setPhone(rs.getString("PHONE"));
                 vo.setGrade(rs.getString("GRADE"));
@@ -40,7 +38,7 @@ public class UserDAO {
         } finally {
             JDBCUtil.close(rs, stmt, conn);
         }
-        return user;
+        return vo;
     }
 
     // 회원가입

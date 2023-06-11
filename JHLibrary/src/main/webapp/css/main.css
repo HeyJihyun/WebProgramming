@@ -310,6 +310,11 @@ select:focus {
     color: white;
 }
 
+
+.booksBanner .text-truncate{
+    width : 80%;
+}
+
 /* insert user */
 
 .input-form {

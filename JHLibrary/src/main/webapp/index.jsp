@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="biz.book.*" %>
+<%@ page import="java.util.List" %>
+<%
+String sort = request.getParameter("sort");
+
+BookDAO dao = new BookDAO();
+List<BookVO> bookList = null;
+bookList = dao.getBookList("pubdate desc");
+request.setAttribute("bookList", bookList); /*  */
+%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="/jsp/include/top.jsp"/>
@@ -35,14 +45,14 @@
                 <table class="table">
                     <a href="">
                         <tr>
-                            <td>공지사항 제목 1</td>
+                            <td>과제가 너무 힘들어요ㅠㅠㅠㅠㅠ</td>
                             <td>2023.06.01</td>
                         </tr>
                     </a>
                     <tr>
                         <a href="">
-                            <td>공지사항 제목 2</td>
-                            <td>2023.06.01</td>
+                            <td>공지사항 못했어여ㅠㅠㅠㅠㅠㅠ</td>
+                            <td>2023.06.11</td>
                         </a>
                     </tr>
                 </table>
@@ -53,48 +63,20 @@
                 <li class="active">신간도서</li>
                 <li>인기도서</li>
             </ul>
-            <a href="">더 보기</a>
+            <a href="${pageContext.request.contextPath }/getBookList.do?sort=pubdate desc">더 보기</a>
             <div class="row content1">
+            <c:forEach var = "i" begin = "0" end = "3">
                 <div class="col-xl-3 col-md-6 col-sm-12">
                     <div class="card">
-                        <img src="https://las.sejong.go.kr/khub/resources/images/2023-05-03/9788950910921" class="card-img-top"
+                        <img src="${bookList.get(i).getCover()}" class="card-img-top"
                             alt="...">
                         <div class="card-body">
-                            <b>책 제목</b><br>
-                            저자
+                            <b class="d-inline-block text-truncate">${bookList.get(i).getTitle()}</b><br>
+                            <i class="d-inline-block text-truncate">${bookList.get(i).getAuthor()}</i>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6 col-sm-12">
-                    <div class="card">
-                        <img src="https://las.sejong.go.kr/khub/resources/images/2023-05-03/9788950910921" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <b>책 제목</b><br>
-                            저자
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 col-sm-12">
-                    <div class="card">
-                        <img src="https://las.sejong.go.kr/khub/resources/images/2023-05-03/9788950910921" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <b>책 제목</b><br>
-                            저자
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 col-sm-12">
-                    <div class="card">
-                        <img src="https://las.sejong.go.kr/khub/resources/images/2023-05-03/9788950910921" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <b>책 제목</b><br>
-                            저자
-                        </div>
-                    </div>
-                </div>
+            </c:forEach>
             </div>
         </article>
     </section>

@@ -13,13 +13,19 @@ public class updateUserController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        String id = ((UserVO) session.getAttribute("user")).getId();
+        UserVO user = (UserVO) session.getAttribute("user");
+        String id = user.getId();
         String newPassword = request.getParameter("newPassword");
         String phone = request.getParameter("phone");
 
         UserDAO dao = new UserDAO();
 
         int result = dao.updateUser(id, newPassword, phone);
+
+        if (result == 1) {
+            dao.getUser(user);
+            session.setAttribute("user", user);
+        }
 
         request.setAttribute("msg", "회원정보 수정이 완료 되었습니다.");
         request.setAttribute("url", "main.do");
