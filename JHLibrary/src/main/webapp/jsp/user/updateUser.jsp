@@ -51,6 +51,7 @@
         <div class="mb-4"></div>
         <button class="btn btn-primary btn-lg btn-block" type="submit">수정</button>
       </form>
+      <a href = "${pageContext.request.contextPath }/deleteUser.do?id=${user.id}"><input type="button" value="탈퇴"> </a>
     </div>
   </section>
   <jsp:include page="/jsp/include/bottom.jsp" />

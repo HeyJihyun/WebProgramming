@@ -10,7 +10,7 @@
 
             <div class="form-floating">
                 <input type="text" class="form-control" id="floatingInput" name="id" value = "${cookie.id.value }" placeholder="name@example.com"> 
-                <label for="floatingInput">Email address</label>
+                <label for="floatingInput">Id</label>
             </div>
             <div class="form-floating">
                 <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"> 
