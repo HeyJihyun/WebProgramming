@@ -92,7 +92,10 @@ public class UserDAO {
 
     // 유저 정보 불러오기
     public List<UserVO> getUserList() {
-        String sql = "SELECT * FROM T_USER ORDER BY grade, ID";
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT ID, NAME, PHONE, GRADE, to_char(MIN(RETURN_DATE),'yyyy-mm-dd')");
+        sql.append("  FROM T_USER left outer join T_RENTAL on T_USER.ID = T_RENTAL.U_ID");
+        sql.append(" GROUP BY ID, NAME, PHONE, GRADE");
 
         List<UserVO> userList = new ArrayList<>();
         try {
@@ -103,10 +106,11 @@ public class UserDAO {
 
             while (rs.next()) {
                 String id = rs.getString(1);
-                String name = rs.getString(3);
-                String phone = rs.getString(4);
-                String grade = rs.getString(5);
-                userList.add(new UserVO(id, null, name, phone, grade));
+                String name = rs.getString(2);
+                String phone = rs.getString(3);
+                String grade = rs.getString(4);
+                String return_date = rs.getString(5);
+                userList.add(new UserVO(id, null, name, phone, grade, return_date));
             }
         } catch (Exception e) {
             e.printStackTrace();

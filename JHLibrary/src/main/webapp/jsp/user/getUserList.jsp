@@ -12,6 +12,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Grade</th>
+                        <th scope="col">Return_date</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -22,6 +23,7 @@
                             <td>${user.name}</td>
                             <td>${user.phone}</td>
                             <td>${user.grade}</td>
+                            <td>${user.return_date}</td>
                             <td>
                             <c:if test = "${user.grade == 'user' }">
                             <a href = "${pageContext.request.contextPath }/updateGrade.do?id=${user.id}"><input type="button" value="관리자로 임명"> </a>

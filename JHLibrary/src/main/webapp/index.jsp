@@ -52,7 +52,7 @@ request.setAttribute("bookList", bookList); /*  */
                     <tr>
                         <a href="">
                             <td>공지사항 못했어여ㅠㅠㅠㅠㅠㅠ</td>
-                            <td>2023.06.11</td>
+                            <td>2023.06.12</td>
                         </a>
                     </tr>
                 </table>
