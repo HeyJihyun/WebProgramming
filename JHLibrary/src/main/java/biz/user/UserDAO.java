@@ -96,6 +96,7 @@ public class UserDAO {
         sql.append("SELECT ID, NAME, PHONE, GRADE, to_char(MIN(RETURN_DATE),'yyyy-mm-dd')");
         sql.append("  FROM T_USER left outer join T_RENTAL on T_USER.ID = T_RENTAL.U_ID");
         sql.append(" GROUP BY ID, NAME, PHONE, GRADE");
+        sql.append(" ORDER BY GRADE");
 
         List<UserVO> userList = new ArrayList<>();
         try {
