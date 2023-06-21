@@ -17,7 +17,15 @@
             <c:forEach var="board" items="${boardList}">
                     <tr onclick="location.href='${pageContext.request.contextPath }/getBoard.do?b_no=${board.b_no }'">
                         <th scope="row">${board.b_no }</th>
-                        <td class="title text-truncate">${board.title }</td>
+                        <td class="title text-truncate">
+                        <c:if test = "${board.level > 1 }">
+                            <c:forEach var="i" begin="1" end="${board.level-1}">
+                            &nbsp;&nbsp;
+                            </c:forEach>
+                            <i class="bi bi-arrow-return-right"></i>
+                        </c:if>
+                        ${board.title }
+                        </td>
                         <td>${board.name }</td>
                         <td>${board.reg_date }</td>
                         <td>${board.hits }</td>

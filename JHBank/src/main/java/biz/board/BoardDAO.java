@@ -14,22 +14,22 @@ public class BoardDAO {
     private PreparedStatement stmt;
     private ResultSet rs;
 
-    // 도서등록
-    public int insertBook(BoardVO board) {
+    // 답글 등록
+    public int insertBoard(BoardVO board) {
         int result = 0;
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO BANK_BOARD (");
         sql.append("       TITLE,");
         sql.append("       CONTENT,");
-        sql.append("       GROUP_ID,");
-        sql.append("       THREAD");
-        sql.append(") VALUES (?, ?,(SELECT NVL(MAX(GROUP_ID), 0) + 1 FROM BANK_BOARD), 'a')");
+        sql.append("       PARENT_ID");
+        sql.append(") VALUES (?, ?, ?)");
 
         try {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(sql.toString());
             stmt.setString(1, board.getTitle());
             stmt.setString(2, board.getContent());
+            stmt.setInt(3, board.getParent_id());
 
             result = stmt.executeUpdate();
         } catch (Exception e) {
@@ -39,6 +39,30 @@ public class BoardDAO {
         }
         return result;
     }
+
+    // 게시글등록
+//    public int insertBoard(BoardVO board) {
+//        int result = 0;
+//        StringBuilder sql = new StringBuilder();
+//        sql.append("INSERT INTO BANK_BOARD (");
+//        sql.append("       TITLE,");
+//        sql.append("       CONTENT");
+//        sql.append(") VALUES (?, ?)");
+//
+//        try {
+//            conn = JDBCUtil.getConnection();
+//            stmt = conn.prepareStatement(sql.toString());
+//            stmt.setString(1, board.getTitle());
+//            stmt.setString(2, board.getContent());
+//
+//            result = stmt.executeUpdate();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            JDBCUtil.close(rs, stmt, conn);
+//        }
+//        return result;
+//    }
 
     // 전체 문의 게시글 갯수 구하기
     public int getBoardTotal() {
@@ -66,11 +90,13 @@ public class BoardDAO {
 
         sql.append("SELECT *");
         sql.append("  FROM (");
-        sql.append("  SELECT m.*, rownum AS rn");
+        sql.append("  SELECT m.*, ROWNUM AS RN");
         sql.append("  FROM (");
-        sql.append("       SELECT B_NO, TITLE, USER_ID, NAME, HITS, GROUP_ID,");
-        sql.append("              TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE, THREAD ");
-        sql.append("         FROM BANK_BOARD ORDER BY GROUP_ID DESC, THREAD ASC");
+        sql.append("              SELECT LEVEL, B_NO, TITLE, CONTENT, REG_DATE, PARENT_ID, USER_ID, NAME, HITS");
+        sql.append("                FROM BANK_BOARD");
+        sql.append("               START WITH PARENT_ID = 0");
+        sql.append("             CONNECT BY PRIOR B_NO = PARENT_ID");
+        sql.append("               ORDER SIBLINGS BY B_NO DESC");
         sql.append("  ) m)");
         sql.append(" WHERE rn BETWEEN ? AND ?");
         try {
@@ -83,14 +109,14 @@ public class BoardDAO {
 
             while (rs.next()) {
                 BoardVO board = new BoardVO();
+                board.setLevel(rs.getInt("LEVEL"));
                 board.setB_no(rs.getInt("B_NO"));
                 board.setTitle(rs.getString("TITLE"));
                 board.setUser_id(rs.getString("USER_ID"));
                 board.setName(rs.getString("NAME"));
                 board.setHits(rs.getInt("HITS"));
                 board.setReg_date(rs.getString("REG_DATE"));
-                board.setGroup_id(rs.getInt("GROUP_ID"));
-                board.setThred(rs.getString("THREAD"));
+                board.setParent_id(rs.getInt("PARENT_ID"));
                 boardList.add(board);
             }
         } catch (Exception e) {
@@ -121,8 +147,7 @@ public class BoardDAO {
                 board.setContent(rs.getString("CONTENT"));
                 board.setHits(rs.getInt("HITS"));
                 board.setReg_date(rs.getString("REG_DATE"));
-                board.setGroup_id(rs.getInt("GROUP_ID"));
-                board.setThred(rs.getString("THREAD"));
+                board.setParent_id(rs.getInt("PARENT_ID"));
             }
         } catch (Exception e) {
             e.printStackTrace();

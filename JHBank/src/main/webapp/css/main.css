@@ -418,4 +418,12 @@ footer {
     float: right;
 }
 
+#getBoard #title{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
 
+#getBoard label{
+    font-size : 0.9rem;
+    margin-bottom: 10px;
+}

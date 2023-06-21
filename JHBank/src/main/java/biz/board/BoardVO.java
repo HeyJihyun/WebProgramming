@@ -2,6 +2,7 @@ package biz.board;
 
 public class BoardVO {
 
+    private int level;
     private int b_no;
     private String title;
     private String user_id;
@@ -9,26 +10,19 @@ public class BoardVO {
     private String content;
     private int hits;
     private String reg_date;
-    private int group_id;
-    private String thred;
+    private int parent_id;
 
     public BoardVO() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public BoardVO(int b_no, String title, String user_id, String name, String content, int hits, String reg_date,
-            int group_id, String thred) {
-        super();
-        this.b_no = b_no;
-        this.title = title;
-        this.user_id = user_id;
-        this.name = name;
-        this.content = content;
-        this.hits = hits;
-        this.reg_date = reg_date;
-        this.group_id = group_id;
-        this.thred = thred;
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getB_no() {
@@ -87,27 +81,33 @@ public class BoardVO {
         this.reg_date = reg_date;
     }
 
-    public int getGroup_id() {
-        return group_id;
+    public int getParent_id() {
+        return parent_id;
     }
 
-    public void setGroup_id(int group_id) {
-        this.group_id = group_id;
+    public void setParent_id(int parent_id) {
+        this.parent_id = parent_id;
     }
 
-    public String getThred() {
-        return thred;
-    }
-
-    public void setThred(String thred) {
-        this.thred = thred;
+    public BoardVO(int level, int b_no, String title, String user_id, String name, String content, int hits,
+            String reg_date, int parent_id) {
+        super();
+        this.level = level;
+        this.b_no = b_no;
+        this.title = title;
+        this.user_id = user_id;
+        this.name = name;
+        this.content = content;
+        this.hits = hits;
+        this.reg_date = reg_date;
+        this.parent_id = parent_id;
     }
 
     @Override
     public String toString() {
-        return "BoardVO [b_no=" + b_no + ", title=" + title + ", user_id=" + user_id + ", name=" + name + ", content="
-                + content + ", hits=" + hits + ", reg_date=" + reg_date + ", group_id=" + group_id + ", thred=" + thred
-                + "]";
+        return "BoardVO [level=" + level + ", b_no=" + b_no + ", title=" + title + ", user_id=" + user_id + ", name="
+                + name + ", content=" + content + ", hits=" + hits + ", reg_date=" + reg_date + ", parent_id="
+                + parent_id + "]";
     }
 
 }

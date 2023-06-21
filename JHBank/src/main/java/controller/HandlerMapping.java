@@ -26,7 +26,6 @@ public class HandlerMapping {
                 Constructor<?> constructor = clz.getConstructor();
 
                 mappings.put(key.toString(), (Controller) constructor.newInstance());
-                System.out.println(key);
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
