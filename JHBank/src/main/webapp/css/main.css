@@ -264,13 +264,12 @@ footer li {
 /* 로그인 폼 */
 .loginSection {
     width: 60%;
-    margin: auto;
+    margin: 30px auto;
 }
 
 .loginSection form {
     margin: auto;
-    width: 450px;
-    padding: 10%;
+    width: 300px;
 }
 
 footer {

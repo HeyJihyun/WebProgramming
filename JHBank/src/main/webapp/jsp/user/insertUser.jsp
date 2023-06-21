@@ -12,7 +12,7 @@
           <div class="row">
             <div class="mb-3">
               <label for="text">아이디</label>
-              <input type="id" class="form-control " id="id" name="id" required="" onchange="checkId()">
+              <input type="text" class="form-control " id="id" name="id" required="" onchange="checkId()">
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
               </div>
@@ -45,7 +45,7 @@
 
           <div class="mb-3">
             <label for="address">생년월일</label>
-            <input type="date" class="form-control" id="name" name="name" required="">
+            <input type="date" class="form-control" id="birthday" name="birthday" required="">
             <div class="invalid-feedback">
               생일을 입력해주세요.
             </div>
@@ -63,7 +63,7 @@
           <div class="row">
             <div class="col-md-6 mb-1">
               <label for="address">주소</label>
-              <input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호" required="" readonly>
+              <input type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호" required="" readonly>
               <div class="invalid-feedback">
                 우편번호 찾기를 눌러주세요
               </div>
@@ -71,16 +71,16 @@
 
             <div class="col-md-6 mb-1">
               <label for="address"> &nbsp;</label>
-              <input type="button" class="form-control btn btn-primary" onclick="sample4_execDaumPostcode()"
+              <input type="button" class="form-control btn btn-primary" onclick="daumPostcode()"
                 value="우편번호 찾기"><br>
             </div>
 
             <div class="mb-1">
-              <input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" readonly>
+              <input type="text" class="form-control" id="roadAddress" name="address" placeholder="도로명주소" readonly>
             </div>
             <div class="mb-3">
               <span id="guide" class="form-control" style="color:#999;display:none"></span>
-              <input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소">
+              <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소">
 
               <div class="invalid-feedback">
                 상세주소를 입력해주세요.

@@ -21,10 +21,10 @@ public class HandlerMapping {
             Set<Object> keys = prop.keySet();
             for (Object key : keys) {
                 String className = prop.getProperty(key.toString());
-//                System.out.println(key + " : " + className);
+                System.out.println(key + " : " + className);
                 Class<?> clz = Class.forName(className);
                 Constructor<?> constructor = clz.getConstructor();
-
+                System.out.println(className);
                 mappings.put(key.toString(), (Controller) constructor.newInstance());
             }
         } catch (Exception e) {
@@ -34,6 +34,7 @@ public class HandlerMapping {
     }
 
     public Controller getController(String uri) {
+        System.out.println(uri);
         return mappings.get(uri);
     }
 
