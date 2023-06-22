@@ -4,9 +4,11 @@ import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import biz.board.BoardDAO;
 import biz.board.BoardVO;
+import biz.user.UserVO;
 import controller.Controller;
 
 public class InsertBoardController implements Controller {
@@ -21,10 +23,14 @@ public class InsertBoardController implements Controller {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
 
+        HttpSession session = request.getSession();
+        UserVO user = (UserVO) session.getAttribute("user");
+
         BoardVO board = new BoardVO();
         board.setTitle(title);
         board.setContent(content);
-
+        board.setUser_id(user.getUser_id());
+        board.setName(user.getUser_name());
         int result = new BoardDAO().insertBoard(board);
 
         String msg = "";

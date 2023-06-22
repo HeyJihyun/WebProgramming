@@ -12,15 +12,17 @@ public class UserDAO {
     private ResultSet rs;
 
     // 아이디 중복체크
-    public int checkId(String id) {
-        String sql = "SELECT * FROM BANK_USER WHERE USER_ID = ?";
+    public int checkId(String id, String type) {
+        String sql = "SELECT * FROM BANK_USER WHERE USER_ID = ? AND SIGNUP_TYPE = ?";
 
         int result = 0;
         try {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(sql.toString());
             stmt.setString(1, id);
-
+            stmt.setString(2, type);
+            System.out.println(id);
+            System.out.println(type);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -67,6 +69,41 @@ public class UserDAO {
         }
 
         return result;
+    }
+
+    // 로그인
+    public UserVO getUser(UserVO vo) {
+        UserVO user = null;
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT * FROM BANK_USER ");
+        sql.append(" WHERE USER_ID = ? AND USER_PWD = ? AND SIGNUP_TYPE = ?");
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+            stmt.setString(1, vo.getUser_id());
+            stmt.setString(2, vo.getUser_pwd());
+            stmt.setString(3, vo.getSingup_type());
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                user = new UserVO();
+                user.setUser_id(rs.getString("USER_ID"));
+                user.setRole_cd(rs.getString("ROLE_CD"));
+                user.setUser_pwd(rs.getString("USER_PWD"));
+                user.setUser_name(rs.getString("USER_NAME"));
+                user.setUser_birthday(rs.getString("USER_BIRTHDAY"));
+                user.setPhone_no(rs.getString("PHONE_NO"));
+                user.setSingup_type(rs.getString("SIGNUP_TYPE"));
+                user.setReg_date(rs.getString("REG_DATE"));
+                user.setPostcode(rs.getString("POSTCODE"));
+                user.setAddress(rs.getString("ADDRESS"));
+                user.setDetail_address(rs.getString("DETAIL_ADDRESS"));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return user;
     }
 
 }

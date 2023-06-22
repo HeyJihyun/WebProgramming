@@ -26,7 +26,6 @@
                     <li><a href="${ pageContext.request.contextPath }/insertUserPage.do">회원가입</a></li>
                     </c:if>
                     <c:if test = "${not empty user}">
-                    <li><a href="#">${ user.name }님의 서재</a></li>
                     <li><a href="${pageContext.request.contextPath }/logout.do">로그아웃</a></li>
                     </c:if>
                 </nav>

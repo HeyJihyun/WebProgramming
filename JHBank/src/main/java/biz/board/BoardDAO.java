@@ -14,22 +14,26 @@ public class BoardDAO {
     private PreparedStatement stmt;
     private ResultSet rs;
 
-    // 답글 등록
+    // 게시글, 답글 등록
     public int insertBoard(BoardVO board) {
         int result = 0;
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO BANK_BOARD (");
         sql.append("       TITLE,");
         sql.append("       CONTENT,");
+        sql.append("       USER_ID,");
+        sql.append("       NAME,");
         sql.append("       PARENT_ID");
-        sql.append(") VALUES (?, ?, ?)");
+        sql.append(") VALUES (?, ?, ?, ?, ?)");
 
         try {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(sql.toString());
             stmt.setString(1, board.getTitle());
             stmt.setString(2, board.getContent());
-            stmt.setInt(3, board.getParent_id());
+            stmt.setString(3, board.getUser_id());
+            stmt.setString(4, board.getName());
+            stmt.setInt(5, board.getParent_id());
 
             result = stmt.executeUpdate();
         } catch (Exception e) {
@@ -39,30 +43,6 @@ public class BoardDAO {
         }
         return result;
     }
-
-    // 게시글등록
-//    public int insertBoard(BoardVO board) {
-//        int result = 0;
-//        StringBuilder sql = new StringBuilder();
-//        sql.append("INSERT INTO BANK_BOARD (");
-//        sql.append("       TITLE,");
-//        sql.append("       CONTENT");
-//        sql.append(") VALUES (?, ?)");
-//
-//        try {
-//            conn = JDBCUtil.getConnection();
-//            stmt = conn.prepareStatement(sql.toString());
-//            stmt.setString(1, board.getTitle());
-//            stmt.setString(2, board.getContent());
-//
-//            result = stmt.executeUpdate();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            JDBCUtil.close(rs, stmt, conn);
-//        }
-//        return result;
-//    }
 
     // 전체 문의 게시글 갯수 구하기
     public int getBoardTotal() {

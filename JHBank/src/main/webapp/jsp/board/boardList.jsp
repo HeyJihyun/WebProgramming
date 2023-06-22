@@ -2,6 +2,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/jsp/include/top.jsp" />
 <section id="board">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
     <h3>문의 게시판</h3>
     <table class="table table-hover">
         <thead class="table-dark">
@@ -35,7 +58,7 @@
         </tbody>
     </table>
     <nav id = "paging" aria-label="Page navigation example">
-            <input type="button" value="문의하기" class="btn btn-primary">
+            <input type="button" value="문의하기" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/insertBoardPage.do'">
         <ul class="pagination">
             <li class="page-item <c:if test="${vpage == 1 }"> disabled </c:if>">
                 <a class="page-link" href="${pageContext.request.contextPath }/getBoardList.do?vpage=${vpage - 1}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>

@@ -95,36 +95,38 @@ function submitForm() {
   const fields = [
     "id",
     "password",
-    "checkPassword",
     "name",
     "postcode",
     "phone",
     "birthday",
     "detailAddress",
+    "checkPassword",
   ];
 
   for (let i = 0; i < fields.length; i++) {
     let field = document.getElementById(fields[i]);
     const regex = /\d{3}-\d{3,4}-\d{4}/;
 
-    // 빈칸있는지 확인
-    if (field.value === null || field.value === "") {
-      field.classList.add("is-invalid");
-      isValidForm = false;
-
-      // 폰넘버 구조식 확인
-    } else if (fields[i] === "phone" && !regex.test(field.value)) {
-      field.classList.add("is-invalid");
-      isValidForm = false;
-
-      // id, password 체크 확인
-    } else if (fields[i] === "id" || fields[i] === "checkPassword") {
-      if (field.classList.contains("is-invalid")) {
+    if (field != null) {
+      // 빈칸있는지 확인
+      if (field.value === null || field.value === "") {
+        field.classList.add("is-invalid");
         isValidForm = false;
+
+        // 폰넘버 구조식 확인
+      } else if (fields[i] === "phone" && !regex.test(field.value)) {
+        field.classList.add("is-invalid");
+        isValidForm = false;
+
+        // id, password 체크 확인
+      } else if (fields[i] === "id" || fields[i] === "checkPassword") {
+        if (field.classList.contains("is-invalid")) {
+          isValidForm = false;
+        }
+      } else {
+        field.classList.remove("is-invalid");
+        field.classList.add("is-valid");
       }
-    } else {
-      field.classList.remove("is-invalid");
-      field.classList.add("is-valid");
     }
   }
 

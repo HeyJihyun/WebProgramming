@@ -17,7 +17,7 @@ function kakaoLogin() {
 
           let kakaoID = kakao_account.email + "K";
           $.ajax({
-            url: "http://localhost:8080/JHBank/kakaoLogin.do",
+            url: "/JHBank/kakaoLogin.do",
             type: "get",
             data: {
               kakaoID: kakaoID,
@@ -27,7 +27,26 @@ function kakaoLogin() {
               console.log(response);
               if (response.trim() === "0") {
                 alert("가입되지 않은 사용자 입니다. 가입화면으로 넘어갑니다.");
-                location.href = "/JHBank/joinPage.do";
+                let f = document.createElement("form");
+
+                let obj;
+                obj = document.createElement("input");
+                obj.setAttribute("type", "hidden");
+                obj.setAttribute("name", "userid");
+                obj.setAttribute("value", kakaoID);
+
+                let obj2;
+                obj2 = document.createElement("input");
+                obj2.setAttribute("type", "hidden");
+                obj2.setAttribute("name", "name");
+                obj2.setAttribute("value", res.properties.nickname);
+
+                f.appendChild(obj);
+                f.appendChild(obj2);
+                f.setAttribute("method", "post");
+                f.setAttribute("action", "/JHBank/kakaoJoinPage.do");
+                document.body.appendChild(f);
+                f.submit();
               } else {
                 console.log("로그인 짠짠!!");
                 location.href = "/JHBank/";

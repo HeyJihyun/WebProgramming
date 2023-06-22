@@ -5,10 +5,9 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import biz.user.UserDAO;
 import controller.Controller;
 
-public class IdCheckController implements Controller {
+public class KakaoJoinPageController implements Controller {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
@@ -18,12 +17,14 @@ public class IdCheckController implements Controller {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String id = request.getParameter("id");
 
-        int result = new UserDAO().checkId(id, "W");
-        request.setAttribute("result", result);
+        String id = request.getParameter("userid");
+        String name = request.getParameter("name");
 
-        return "/jsp/etc/ajax.jsp";
+        request.setAttribute("kakaoID", id);
+        request.setAttribute("kakaoName", name);
+
+        return "/jsp/user/kakaoJoin.jsp";
 
     }
 }

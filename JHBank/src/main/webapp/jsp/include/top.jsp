@@ -25,8 +25,14 @@
                 </h1>
                 <i class="bi bi-list"></i>
                 <nav>
-                    <li><a href="/JHBank/login.do">로그인</a></li>
-                    <li><a href="/JHBank/insertUserPage.do">회원가입</a></li>
+                    <c:if test="${empty user}">
+                        <li><a href="/JHBank/loginPage.do">로그인</a></li>
+                        <li><a href="/JHBank/joinPage.do">회원가입</a></li>
+                    </c:if>
+                    <c:if test="${not empty user}">
+                        <li><a href="#">${ user.user_name }님</a></li>
+                        <li><a href="${pageContext.request.contextPath }/logout.do">로그아웃</a></li>
+                    </c:if>
                 </nav>
             </div>
             <hr>
@@ -69,9 +75,9 @@
         <div class="mobileMenu">
             <nav class="m-top">
 
-                <a href="/JHBank/login.do">
+                <a href="/JHBank/loginPage.do">
                     <li><i class="bi bi-lock-fill"></i> 로그인</li>
-                </a> <a href="/JHBank/insertUserPage.do">
+                </a> <a href="/JHBank/joinPage.do">
                     <li><i class="bi bi-person-fill"></i> 회원가입</li>
                 </a>
                 <li><i class="bi bi-x-lg"></i></li>
@@ -83,14 +89,14 @@
                 </a> <a href="#">
                     <li>오시는길</li>
                 </a>
-                
+
                 <h3>Product</h3>
                 <a href="/JHBank/getBookList.do">
                     <li>상품보기</li>
                 </a> <a href="#">
                     <li>인기상품</li>
                 </a>
-                
+
                 <h3>My Account</h3>
                 <a href="#">
                     <li>계좌개설</li>
@@ -101,7 +107,7 @@
                 </a> <a href="#">
                     <li>계좌해지</li>
                 </a>
-                
+
                 <h3>Open Banking</h3>
                 <a href="#">
                     <li>약관동의</li>
