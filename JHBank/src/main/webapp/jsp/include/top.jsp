@@ -41,7 +41,7 @@
                     <li><a href="#">JH Bank</a>
                         <nav class="sub-menu">
                             <li><a href="#">JH 은행</a></li>
-                            <li><a href="#">오시는길</a></li>
+                            <li><a href="${pageContext.request.contextPath }/map.do">오시는길</a></li>
                         </nav></li>
                     <li><a href="#">Product</a>
                         <nav class="sub-menu">

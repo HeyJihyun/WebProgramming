@@ -20,8 +20,10 @@
                 </div>
             </div>                   
             <button class="btn btn-primary btn-lg btn-block" type="submit">답글</button>
+            <c:if test = "${user.user_id == board.user_id || user.role_cd == 'M1' }">
             <button class="btn btn-primary btn-lg btn-block" type="button">수정</button>
             <button class="btn btn-primary btn-lg btn-block" type="button">삭제</button>
+            </c:if>
         </form>
     </div>
 </section>

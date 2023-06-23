@@ -426,3 +426,8 @@ footer {
     font-size : 0.9rem;
     margin-bottom: 10px;
 }
+
+/* map */
+#mapPage, #map{
+    margin: 30px auto;
+}
