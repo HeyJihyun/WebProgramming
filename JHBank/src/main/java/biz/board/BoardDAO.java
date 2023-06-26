@@ -63,6 +63,49 @@ public class BoardDAO {
         return result;
     }
 
+    // 내 문의보기
+    public List<BoardVO> getBoardList(int start, String id) {
+        List<BoardVO> boardList = new ArrayList<BoardVO>();
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT *");
+        sql.append("  FROM (");
+        sql.append("  SELECT m.*, ROWNUM AS RN");
+        sql.append("  FROM (");
+        sql.append("              SELECT LEVEL, B_NO, TITLE, CONTENT, REG_DATE, PARENT_ID, USER_ID, NAME, HITS");
+        sql.append("                FROM BANK_BOARD");
+        sql.append("               START WITH PARENT_ID = 0 AND USER_ID = ?");
+        sql.append("             CONNECT BY PRIOR B_NO = PARENT_ID");
+        sql.append("               ORDER SIBLINGS BY B_NO DESC");
+        sql.append("  ) m)");
+        sql.append(" WHERE rn BETWEEN ? AND ?");
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+            stmt.setString(1, id);
+            stmt.setInt(2, start);
+            stmt.setInt(3, start + 9);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                BoardVO board = new BoardVO();
+                board.setLevel(rs.getInt("LEVEL"));
+                board.setB_no(rs.getInt("B_NO"));
+                board.setTitle(rs.getString("TITLE"));
+                board.setUser_id(rs.getString("USER_ID"));
+                board.setName(rs.getString("NAME"));
+                board.setHits(rs.getInt("HITS"));
+                board.setReg_date(rs.getString("REG_DATE"));
+                board.setParent_id(rs.getInt("PARENT_ID"));
+                boardList.add(board);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return boardList;
+    }
+
     // 문의글 전체 보기
     public List<BoardVO> getBoardList(int start) {
         List<BoardVO> boardList = new ArrayList<BoardVO>();

@@ -45,12 +45,11 @@
                         </nav></li>
                     <li><a href="#">Product</a>
                         <nav class="sub-menu">
-                            <li><a href="/JHBank/getBookList.do">상품보기</a></li>
-                            <li><a href="/JHBank/getBookList.do?sort=pubdate desc">인기상품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/productList.do">상품보기</a></li>
                         </nav></li>
                     <li><a href="#">My Account</a>
                         <nav class="sub-menu">
-                            <li><a href="#">계좌개설</a></li>
+                            <li><a href="${pageContext.request.contextPath }/productList.do">계좌개설</a></li>
                             <li><a href="#">내역조회</a></li>
                             <li><a href="#">계좌이체</a></li>
                             <li><a href="#">계좌해지</a></li>
@@ -64,7 +63,7 @@
                         <nav class="sub-menu">
                             <li><a href="/JHBank/updateUserPage.do">회원정보수정</a></li>
                             <li><a href="/JHBank/rentalList.do">회원탈퇴</a></li>
-                            <li><a href="#">내 문의</a></li>
+                            <li><a href="${pageContext.request.contextPath }/myBoard.do">내 문의</a></li>
                         </nav></li>
                 </nav>
             </div>
@@ -86,19 +85,17 @@
                 <h3>JH Bank</h3>
                 <a href="#">
                     <li>Jh 은행</li>
-                </a> <a href="#">
+                </a> <a href="${pageContext.request.contextPath }/map.do">
                     <li>오시는길</li>
                 </a>
 
                 <h3>Product</h3>
-                <a href="/JHBank/getBookList.do">
+                <a href="${pageContext.request.contextPath }/productList.do">
                     <li>상품보기</li>
-                </a> <a href="#">
-                    <li>인기상품</li>
                 </a>
 
                 <h3>My Account</h3>
-                <a href="#">
+                <a href="${pageContext.request.contextPath }/productList.do">
                     <li>계좌개설</li>
                 </a> <a href="/JHBank/insertUserPage.do">
                     <li>내역조회</li>
@@ -120,7 +117,7 @@
                     <li>회원정보수정</li>
                 </a> <a href="/JHBank/rentalList.do">
                     <li>회원탈퇴</li>
-                </a> <a href="#">
+                </a> <a href="${pageContext.request.contextPath }/myBoard.do">
                     <li>내 문의</li>
                 </a>
             </nav>

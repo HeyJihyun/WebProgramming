@@ -431,3 +431,17 @@ footer {
 #mapPage, #map{
     margin: 30px auto;
 }
+
+/* deposit */
+
+#deposit{
+    margin: 30px auto;
+    width: 80%;
+    text-align: center;
+}
+
+#deposit .card-text{
+    height: 70px;
+    overflow: hidden;
+    
+}

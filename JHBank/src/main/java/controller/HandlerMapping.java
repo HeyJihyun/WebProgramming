@@ -28,7 +28,6 @@ public class HandlerMapping {
                 mappings.put(key.toString(), (Controller) constructor.newInstance());
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

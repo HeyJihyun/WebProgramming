@@ -6,7 +6,7 @@
     </c:if>
     <section class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <h4 class="mb-3">카카오 회원가입</h4>
+        <h4 class="mb-3">회원가입</h4>
         <form class="validation-form" id="insertUser" novalidate="" onsubmit="return submitForm()"
           action="${ pageContext.request.contextPath }/insertUser.do" method="post">
           <div class="row">

@@ -18,10 +18,13 @@
         <div>
             <a href="${pageContext.request.contextPath }/getBoardList.do">
                 <div class="img img3"></div>
-            </a> <b>문의게시판</b>
+            </a>
+             <b>문의게시판</b>
         </div>
         <div>
+        <a href="${pageContext.request.contextPath }/productList.do">
             <div class="img img4"></div>
+        </a>
             <b>적금개설</b>
         </div>
     </div>
