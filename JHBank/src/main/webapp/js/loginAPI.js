@@ -64,15 +64,13 @@ function kakaoLogin() {
   });
 }
 
-// function kakaoLogout() {
-//   Kakao.init("0aebe6a45346423e17101d47f32c083e");
-//   Kakao.isInitialized();
-//   if (!Kakao.Auth.getAccessToken()) {
-//     console.log("Not 뭐래");
-//     return;
-//   }
 
-//   Kakao.Auth.logout(function () {
-//     console.log(KaKao.auth.getAccessToken());
-//   });
-// }
+function kakaoLogout() {
+  Kakao.Auth.logout(function(response) {
+    if (response === true) {
+      console.log('카카오 로그아웃 성공');
+    } else {
+      console.log('카카오 로그아웃 실패');
+    }
+  });
+}

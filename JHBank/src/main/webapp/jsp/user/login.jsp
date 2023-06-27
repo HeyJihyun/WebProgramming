@@ -4,8 +4,7 @@
     <c:if test="${not empty user}">
       <script>alert("이미 로그인 되었습니다."); location.href = "main.do";</script>
     </c:if>
-    <script src="https://developer.kakao.com/sdk/js/kakao.js"></script>
-    <script src="${pageContext.request.contextPath }/js/loginAPI.js"></script>
+
     <section class="loginSection">
       <form action="${ pageContext.request.contextPath }/loginProcess.do" method="post">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>

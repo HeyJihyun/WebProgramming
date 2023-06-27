@@ -63,6 +63,30 @@ public class BoardDAO {
         return result;
     }
 
+    // 내문의 전체 게시글 갯수 구하기
+    public int getBoardTotal(String id) {
+        int result = 0;
+        StringBuilder sql = new StringBuilder();
+        sql.append(" SELECT count(*) FROM BANK_BOARD");
+        sql.append("               START WITH PARENT_ID = 0 AND USER_ID = ?");
+        sql.append("             CONNECT BY PRIOR B_NO = PARENT_ID");
+        sql.append("               ORDER SIBLINGS BY B_NO DESC");
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+            stmt.setString(1, id);
+
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                result = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     // 내 문의보기
     public List<BoardVO> getBoardList(int start, String id) {
         List<BoardVO> boardList = new ArrayList<BoardVO>();

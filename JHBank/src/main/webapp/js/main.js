@@ -175,3 +175,22 @@ function daumPostcode() {
     },
   }).open();
 }
+
+const popoverTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="popover"]'
+);
+const popoverList = [...popoverTriggerList].map(
+  (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+);
+const popover = new bootstrap.Popover(".popover-dismiss", {
+  trigger: "focus",
+});
+
+function paste(account_no) {
+  var textarea = document.createElement("textarea");
+  document.body.appendChild(textarea);
+  textarea.value = account_no;
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+}

@@ -3,6 +3,8 @@ package biz.bank.account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import biz.common.JDBCUtil;
 
@@ -65,6 +67,41 @@ public class AccountDAO {
         }
 
         return result;
+    }
+
+    // 내계좌리스트 조회
+    public List<AccountVO> getAccountList(String id) {
+        List<AccountVO> accountList = new ArrayList<AccountVO>();
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT * FROM BANK_ACCOUNT WHERE USER_ID = ? AND STATUS = 1");
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+            stmt.setString(1, id);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                AccountVO account = new AccountVO();
+                account.setAccount_id(rs.getInt("ACCOUNT_ID"));
+                account.setAccount_no(rs.getString("ACCOUNT_NO"));
+                account.setBank_cd(rs.getString("BANK_CD"));
+                account.setAccount_nm(rs.getString("ACCOUNT_NM"));
+                account.setAccount_pwd(rs.getString("ACCOUNT_PWD"));
+                account.setDeposit_cd(rs.getInt("DEPOSIT_CD"));
+                account.setUser_id(rs.getString("USER_ID"));
+                account.setReg_date(rs.getDate("REG_DATE"));
+                account.setExpiration_date(rs.getDate("EXPIRATION_DATE"));
+                account.setBalance(rs.getInt("BALANCE"));
+                account.setStatus(rs.getInt("STATUS"));
+
+                accountList.add(account);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return accountList;
     }
 
 }

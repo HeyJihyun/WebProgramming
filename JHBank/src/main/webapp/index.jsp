@@ -8,7 +8,9 @@
             모두가 부자되는 JH 은행입니다. <br> 반가워요
         </p>
         <div>
+            <a href="${pageContext.request.contextPath }/accountList.do">
             <div class="img img1"></div>
+            </a>
             <b>계좌조회</b>
         </div>
         <div>

@@ -14,6 +14,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script src="/JHBank/js/main.js" defer></script>
+    <script src="https://developer.kakao.com/sdk/js/kakao.js"></script>
+    <script src="${pageContext.request.contextPath }/js/loginAPI.js"></script>
 </head>
 
 <body>
@@ -57,13 +59,15 @@
                     <li><a href="#">Open Banking</a>
                         <nav class="sub-menu">
                             <li><a href="#">약관동의</a></li>
-                            <li><a href="#">계좌조회</a></li>
+                            <li><a href="${pageContext.request.contextPath }/accountList.do">계좌조회</a></li>
                         </nav></li>
                     <li><a href="#">My Page</a>
                         <nav class="sub-menu">
                             <li><a href="/JHBank/updateUserPage.do">회원정보수정</a></li>
                             <li><a href="/JHBank/rentalList.do">회원탈퇴</a></li>
+                            <c:if test = "${not empty user }">
                             <li><a href="${pageContext.request.contextPath }/myBoard.do">내 문의</a></li>
+                            </c:if>
                         </nav></li>
                 </nav>
             </div>
@@ -108,7 +112,7 @@
                 <h3>Open Banking</h3>
                 <a href="#">
                     <li>약관동의</li>
-                </a> <a href="#">
+                </a> <a href="${pageContext.request.contextPath }/accountList.do">
                     <li>계좌조회</li>
                 </a>
 
@@ -117,8 +121,11 @@
                     <li>회원정보수정</li>
                 </a> <a href="/JHBank/rentalList.do">
                     <li>회원탈퇴</li>
-                </a> <a href="${pageContext.request.contextPath }/myBoard.do">
+                </a> 
+                <c:if test = "${not empty user }">
+                <a href="${pageContext.request.contextPath }/myBoard.do">
                     <li>내 문의</li>
                 </a>
+                </c:if>
             </nav>
     </header>
