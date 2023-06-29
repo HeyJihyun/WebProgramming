@@ -27,9 +27,9 @@ public class TransferController implements Controller {
         HistoryVO history = new HistoryVO();
         history.setFrom_account_no(request.getParameter("from_account_no"));
         history.setTo_account_no(request.getParameter("to_account_no"));
-        history.setFrom_bank_cd("JH");
-        history.setTo_bank_cd(request.getParameter("bank_cd"));
-        history.setH_mount(Integer.parseInt(request.getParameter("balance")));
+        history.setFrom_bank_cd(request.getParameter("from_bank_cd"));
+        history.setTo_bank_cd(request.getParameter("to_bank_cd"));
+        history.setH_mount(Long.parseLong(request.getParameter("balance")));
         history.setFrom_nm(request.getParameter("from_nm"));
         history.setTo_nm(request.getParameter("to_nm"));
 

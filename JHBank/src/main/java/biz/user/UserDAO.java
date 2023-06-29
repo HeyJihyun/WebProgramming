@@ -100,7 +100,9 @@ public class UserDAO {
                 user.setDetail_address(rs.getString("DETAIL_ADDRESS"));
             }
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
         }
 
         return user;

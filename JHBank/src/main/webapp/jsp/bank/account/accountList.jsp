@@ -20,6 +20,7 @@
                     <h5 class="card-title">${account.account_nm }</h5>
                 </div>
                 <div class="card-body">
+                    <form method="post">
                     <h6 class="card-subtitle mb-2 text-muted">${account.account_no }
                         <a tabindex="0" onclick="paste('${account.account_no }')" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="복사가 완료되었습니다."> <small class="text-muted"><i class="bi bi-files"></i></small>
                         </a>
@@ -28,8 +29,9 @@
                         \
                         <fmt:formatNumber value="${account.balance }" pattern="#,###" />
                     </h3>
-                    <form method="post">
                     <input type="hidden" name="account_id" value="${account.account_id }">
+                    <input type="hidden" name="account_no" value="${account.account_no }">
+                    <input type="hidden" name="bank_cd" value="${account.bank_cd }">
                         <div class="row">
                             <input type="submit" class="col btn btn btn-primary" value="거래내역" formaction="${ pageContext.request.contextPath }/transaction.do">
                             <c:if test="${account.deposit_cd == 1 }">

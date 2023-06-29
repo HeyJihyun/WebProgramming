@@ -10,14 +10,30 @@ public class HistoryVO {
     public String to_account_no;
     public String to_bank_cd;
     public String to_nm;
-    public int h_mount;
+    public long h_mount;
     public Date h_datetime;
+    private String h_class;
+    private long h_balance;
 
-    @Override
-    public String toString() {
-        return "HistoryVO [h_no=" + h_no + ", from_account_no=" + from_account_no + ", from_bank_cd=" + from_bank_cd
-                + ", from_nm=" + from_nm + ", to_account_no=" + to_account_no + ", to_bank_cd=" + to_bank_cd
-                + ", to_nm=" + to_nm + ", h_mount=" + h_mount + ", h_datetime=" + h_datetime + "]";
+    public HistoryVO() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    public HistoryVO(int h_no, String from_account_no, String from_bank_cd, String from_nm, String to_account_no,
+            String to_bank_cd, String to_nm, long h_mount, Date h_datetime, String h_class, long h_balance) {
+        super();
+        this.h_no = h_no;
+        this.from_account_no = from_account_no;
+        this.from_bank_cd = from_bank_cd;
+        this.from_nm = from_nm;
+        this.to_account_no = to_account_no;
+        this.to_bank_cd = to_bank_cd;
+        this.to_nm = to_nm;
+        this.h_mount = h_mount;
+        this.h_datetime = h_datetime;
+        this.h_class = h_class;
+        this.h_balance = h_balance;
     }
 
     public int getH_no() {
@@ -76,11 +92,11 @@ public class HistoryVO {
         this.to_nm = to_nm;
     }
 
-    public int getH_mount() {
+    public long getH_mount() {
         return h_mount;
     }
 
-    public void setH_mount(int h_mount) {
+    public void setH_mount(long h_mount) {
         this.h_mount = h_mount;
     }
 
@@ -92,22 +108,27 @@ public class HistoryVO {
         this.h_datetime = h_datetime;
     }
 
-    public HistoryVO(int h_no, String from_account_no, String from_bank_cd, String from_nm, String to_account_no,
-            String to_bank_cd, String to_nm, int h_mount, Date h_datetime) {
-        super();
-        this.h_no = h_no;
-        this.from_account_no = from_account_no;
-        this.from_bank_cd = from_bank_cd;
-        this.from_nm = from_nm;
-        this.to_account_no = to_account_no;
-        this.to_bank_cd = to_bank_cd;
-        this.to_nm = to_nm;
-        this.h_mount = h_mount;
-        this.h_datetime = h_datetime;
+    public String getH_class() {
+        return h_class;
     }
 
-    public HistoryVO() {
-        super();
-        // TODO Auto-generated constructor stub
+    public void setH_class(String h_class) {
+        this.h_class = h_class;
+    }
+
+    public long getH_balance() {
+        return h_balance;
+    }
+
+    public void setH_balance(long h_balance) {
+        this.h_balance = h_balance;
+    }
+
+    @Override
+    public String toString() {
+        return "HistoryVO [h_no=" + h_no + ", from_account_no=" + from_account_no + ", from_bank_cd=" + from_bank_cd
+                + ", from_nm=" + from_nm + ", to_account_no=" + to_account_no + ", to_bank_cd=" + to_bank_cd
+                + ", to_nm=" + to_nm + ", h_mount=" + h_mount + ", h_datetime=" + h_datetime + ", h_class=" + h_class
+                + ", h_balance=" + h_balance + "]";
     }
 }

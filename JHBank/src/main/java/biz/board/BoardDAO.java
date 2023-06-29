@@ -59,6 +59,8 @@ public class BoardDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
         }
         return result;
     }
@@ -83,6 +85,8 @@ public class BoardDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
         }
         return result;
     }
@@ -126,6 +130,8 @@ public class BoardDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
         }
         return boardList;
     }
@@ -168,6 +174,8 @@ public class BoardDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
         }
         return boardList;
     }
@@ -198,6 +206,8 @@ public class BoardDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
         }
         return board;
     }

@@ -477,3 +477,18 @@ footer {
     display: inline-block;
     width: 90px;
 }
+
+
+#transaction, #transferPage {
+    width: 70%;
+    margin: 30px auto;
+}
+
+#transferPage{
+    text-align: left
+}
+
+#transferPage form{
+    margin: 20px 0;
+    
+}

@@ -38,6 +38,8 @@ public class DepositDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
         }
         return depositList;
     }
@@ -66,6 +68,8 @@ public class DepositDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
         }
         return deposit;
     }
