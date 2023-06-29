@@ -5,11 +5,11 @@
     <script type="text/javascript">
     $().ready(function () {
             Swal.fire({
-                icon: 'success',                         // Alert 타입
-                title: '${msg}',         // Alert 제목
-                text: '이곳은 내용이 나타나는 곳입니다.',  // Alert 내용
+                icon: '${alert.icon}',                         // Alert 타입
+                title: '${alert.msg}',         // Alert 제목
+                text: '${alert.text}',  // Alert 내용
             }).then(function(){
-                location.href='${url}';
+                location.href='${alert.url}';
             });
     });
     </script>

@@ -1,14 +1,11 @@
 package controller.bank.account;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import biz.bank.account.AccountDAO;
-import biz.bank.account.AccountVO;
-import biz.user.UserVO;
+import biz.bank.history.HistoryVO;
 import controller.Controller;
 
 public class TransferController implements Controller {
@@ -20,14 +17,26 @@ public class TransferController implements Controller {
         if (session.getAttribute("user") == null) {
             return "loginPage.do";
         }
-        UserVO user = (UserVO) session.getAttribute("user");
-        String id = user.getUser_id();
 
-        List<AccountVO> accountList = new AccountDAO().getAccountList(id);
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        request.setAttribute("accountList", accountList);
+        HistoryVO history = new HistoryVO();
+        history.setFrom_account_no(request.getParameter("from_account_no"));
+        history.setTo_account_no(request.getParameter("to_account_no"));
+        history.setFrom_bank_cd("JH");
+        history.setTo_bank_cd(request.getParameter("bank_cd"));
+        history.setH_mount(Integer.parseInt(request.getParameter("balance")));
+        history.setFrom_nm(request.getParameter("from_nm"));
+        history.setTo_nm(request.getParameter("to_nm"));
 
-        return "/jsp/bank/account/accountList.jsp";
+        int result = new AccountDAO().transfer(history);
+        System.out.println(result);
+
+        return "accountList.do";
 
     }
 }

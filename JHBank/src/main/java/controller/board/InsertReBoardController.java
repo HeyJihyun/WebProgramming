@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import biz.AlertVO;
 import biz.board.BoardDAO;
 import biz.board.BoardVO;
 import biz.user.UserVO;
@@ -42,8 +43,7 @@ public class InsertReBoardController implements Controller {
         } else {
             msg = "답글 등록에 실패하였습니다. 잠시후 다시 시도해주세요.";
         }
-        request.setAttribute("msg", msg);
-        request.setAttribute("url", "getBoardList.do");
+        request.setAttribute("alert", new AlertVO(result, msg, null, "getBoardList.do"));
         return "/jsp/etc/alert.jsp";
 
     }

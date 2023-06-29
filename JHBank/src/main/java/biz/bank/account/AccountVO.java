@@ -12,7 +12,7 @@ public class AccountVO {
     private String user_id;
     private Date reg_date;
     private Date expiration_date;
-    private int balance;
+    private long balance;
     private int status;
 
     public AccountVO() {
@@ -21,7 +21,7 @@ public class AccountVO {
     }
 
     public AccountVO(int account_id, String account_no, String bank_cd, String account_nm, String account_pwd,
-            int deposit_cd, String user_id, Date reg_date, Date expiration_date, int balance, int status) {
+            int deposit_cd, String user_id, Date reg_date, Date expiration_date, long balance, int status) {
         super();
         this.account_id = account_id;
         this.account_no = account_no;
@@ -108,11 +108,11 @@ public class AccountVO {
         this.expiration_date = expiration_date;
     }
 
-    public int getBalance() {
+    public long getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(long balance) {
         this.balance = balance;
     }
 

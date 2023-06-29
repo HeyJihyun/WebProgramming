@@ -5,6 +5,7 @@
 <section id="accountList" class="container text-center">
     <div class="row" style="max-width: 600px;">
         <h4>계좌 조회</h4>
+        <h5>총 : <fmt:formatNumber value="${sumBalance }" pattern="#,###" /> 원</h5>
         <c:forEach var="account" items="${accountList}">
             <div class="card col-12 mb-3 border-warning">
                 <div class="card-header text-bg-warning ">
@@ -28,13 +29,11 @@
                         <fmt:formatNumber value="${account.balance }" pattern="#,###" />
                     </h3>
                     <form method="post">
-                    <input type="hidden" name="account_no" value="${account.account_no }">
-                    <input type="hidden" name="bank_cd" value="${account.bank_cd }">
-                    <input type="hidden" name="balance" value="${account.balance }">
+                    <input type="hidden" name="account_id" value="${account.account_id }">
                         <div class="row">
                             <input type="submit" class="col btn btn btn-primary" value="거래내역" formaction="${ pageContext.request.contextPath }/transaction.do">
                             <c:if test="${account.deposit_cd == 1 }">
-                                <input type="submit" class="col ms-3 btn btn-warning" value="이체하기" formaction="${ pageContext.request.contextPath }/transfer.do">
+                                <input type="submit" class="col ms-3 btn btn-warning" value="이체하기" formaction="${ pageContext.request.contextPath }/transferPage.do">
                             </c:if>
                         </div>
                     </form>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import biz.AlertVO;
 import biz.bank.account.AccountDAO;
 import biz.bank.account.AccountVO;
 import biz.user.UserVO;
@@ -32,7 +33,7 @@ public class InsertAccountController implements Controller {
         account.setBank_cd("JH");
         account.setDeposit_cd(Integer.parseInt(request.getParameter("deposit_cd")));
         account.setUser_id(((UserVO) session.getAttribute("user")).getUser_id());
-        account.setBalance(Integer.parseInt(request.getParameter("balance")));
+        account.setBalance(Long.parseLong(request.getParameter("balance")));
 
         Calendar cal = Calendar.getInstance();
         Date date = new Date();
@@ -52,8 +53,7 @@ public class InsertAccountController implements Controller {
             msg = "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.";
         }
 
-        request.setAttribute("msg", msg);
-        request.setAttribute("url", request.getContextPath());
+        request.setAttribute("alert", new AlertVO(result, msg, null, request.getContextPath()));
         return "/jsp/etc/alert.jsp";
 
     }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import biz.AlertVO;
 import biz.user.UserDAO;
 import biz.user.UserVO;
 import controller.Controller;
@@ -47,8 +48,10 @@ public class LoginProcessController implements Controller {
             session.setAttribute("user", user);
             return "main.do";
         } else {
-            request.setAttribute("msg", "아이디 또는 비밀번호가 맞지 않습니다.");
-            request.setAttribute("url", "loginPage.do");
+            String msg = "아이디 또는 비밀번호가 맞지 않습니다.";
+            String url = "loginPage.do";
+            request.setAttribute("alert", new AlertVO(0, msg, null, url));
+
             return "/jsp/etc/alert.jsp";
         }
 

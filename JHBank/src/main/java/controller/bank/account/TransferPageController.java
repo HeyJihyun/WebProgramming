@@ -11,7 +11,7 @@ import biz.bank.account.AccountVO;
 import biz.user.UserVO;
 import controller.Controller;
 
-public class AccountListController implements Controller {
+public class TransferPageController implements Controller {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
@@ -25,15 +25,12 @@ public class AccountListController implements Controller {
 
         List<AccountVO> accountList = new AccountDAO().getAccountList(id);
 
-        long sumBalance = 0;
-        for (AccountVO account : accountList) {
-            sumBalance += account.getBalance();
-        }
-
-        request.setAttribute("sumBalance", sumBalance);
+        String account_id = request.getParameter("account_id");
+        AccountVO account = new AccountDAO().getAccount(account_id);
         request.setAttribute("accountList", accountList);
+        request.setAttribute("account", account);
 
-        return "/jsp/bank/account/accountList.jsp";
+        return "/jsp/bank/account/transferPage.jsp";
 
     }
 }

@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import biz.AlertVO;
 import biz.user.UserDAO;
 import biz.user.UserVO;
 import controller.Controller;
@@ -42,8 +43,9 @@ public class InsertUserController implements Controller {
             msg = "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.";
         }
 
-        request.setAttribute("msg", msg);
-        request.setAttribute("url", request.getContextPath() + "/jsp/user/login.jsp");
+        String url = request.getContextPath() + "/jsp/user/login.jsp";
+        request.setAttribute("alert", new AlertVO(result, msg, null, url));
+
         return "/jsp/etc/alert.jsp";
 
     }
