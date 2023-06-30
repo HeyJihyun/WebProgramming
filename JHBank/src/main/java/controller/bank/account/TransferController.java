@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import biz.AlertVO;
 import biz.bank.account.AccountDAO;
 import biz.bank.history.HistoryVO;
 import controller.Controller;
@@ -34,9 +35,17 @@ public class TransferController implements Controller {
         history.setTo_nm(request.getParameter("to_nm"));
 
         int result = new AccountDAO().transfer(history);
-        System.out.println(result);
+        String msg = "";
+        if (result == 1) {
+            msg = "이체가 완료되었습니다.";
+        } else {
+            msg = "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.";
+        }
 
-        return "accountList.do";
+        String url = request.getContextPath() + "/accountList.do";
+        request.setAttribute("alert", new AlertVO(result, msg, null, url));
+
+        return "/jsp/etc/alert.jsp";
 
     }
 }

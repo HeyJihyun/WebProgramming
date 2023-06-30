@@ -48,6 +48,7 @@ function checkAccount() {
       console.log(response);
       if (response.trim() === "") {
         $("#result").text("계좌가 존재하지 않습니다.");
+        $("#to_nm").val('');
       } else {
         $("#result").text("");
         $("#to_nm").val(response);

@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<jsp:include page="/jsp/include/top.jsp" />
 <section id="accountList" class="container text-center">
     <div class="row" style="max-width: 700px;">
         <h4>JH은행 계좌 조회</h4>
@@ -65,5 +65,3 @@
         </div>
     </div>
 </section>
-<jsp:include page="/jsp/bank/account/openAccountList.jsp" />
-<jsp:include page="/jsp/include/bottom.jsp" />

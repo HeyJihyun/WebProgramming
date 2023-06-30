@@ -59,7 +59,7 @@
                         </nav></li>
                     <li><a href="#">Open Banking</a>
                         <nav class="sub-menu">
-                            <li><a href="#">약관동의</a></li>
+                            <li><a href="${pageContext.request.contextPath }/agreePage.do">약관동의</a></li>
                             <li><a href="${pageContext.request.contextPath }/accountList.do">계좌조회</a></li>
                         </nav></li>
                     <li><a href="#">My Page</a>
@@ -111,7 +111,7 @@
                 </a>
 
                 <h3>Open Banking</h3>
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/agreePage.do">
                     <li>약관동의</li>
                 </a> <a href="${pageContext.request.contextPath }/accountList.do">
                     <li>계좌조회</li>

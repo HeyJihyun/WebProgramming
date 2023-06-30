@@ -479,7 +479,7 @@ footer {
 }
 
 
-#transaction, #transferPage {
+#transaction, #transferPage, #agreePage {
     width: 70%;
     margin: 30px auto;
 }
@@ -490,5 +490,11 @@ footer {
 
 #transferPage form{
     margin: 20px 0;
+    
+}
+ 
+/*#agreePage */
+
+#agreePage{
     
 }

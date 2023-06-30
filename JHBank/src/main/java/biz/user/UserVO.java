@@ -12,6 +12,15 @@ public class UserVO {
     private String reg_date;
     private String postcode;
     private String address;
+    private int open_agreement;
+
+    public int getOpen_agreement() {
+        return open_agreement;
+    }
+
+    public void setOpen_agreement(int open_agreement) {
+        this.open_agreement = open_agreement;
+    }
 
     @Override
     public String toString() {

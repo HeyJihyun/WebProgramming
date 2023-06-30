@@ -3,6 +3,8 @@ package biz.user;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 import biz.common.JDBCUtil;
 
@@ -98,6 +100,7 @@ public class UserDAO {
                 user.setPostcode(rs.getString("POSTCODE"));
                 user.setAddress(rs.getString("ADDRESS"));
                 user.setDetail_address(rs.getString("DETAIL_ADDRESS"));
+                user.setOpen_agreement(rs.getInt("OPEN_AGREEMENT"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,6 +109,78 @@ public class UserDAO {
         }
 
         return user;
+    }
+
+    public UserVO updateAgree(UserVO user) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("UPDATE BANK_USER SET OPEN_AGREEMENT = 1 WHERE USER_ID = ?");
+
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+            stmt.setString(1, user.getUser_id());
+            int reuslt = stmt.executeUpdate();
+
+            if (reuslt == 1) {
+                user.setOpen_agreement(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
+
+        return user;
+    }
+
+    public Map<String, String> getOpenbankList(UserVO user) {
+        Map<String, String> bankMap = new HashMap<String, String>();
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT 'BGH'   AS BANK_CD, ");
+        sql.append("       USER_ID AS ID ");
+        sql.append("  FROM B_USER@GH ");
+        sql.append(" WHERE USER_NAME = ? ");
+        sql.append("   AND USER_BIRTH = ? ");
+        sql.append("   AND USER_PHONE = REPLACE(?, '-', '') ");
+        sql.append("UNION ALL ");
+        sql.append("SELECT '0758'  AS BANK_CD, ");
+        sql.append("       USER_ID AS ID ");
+        sql.append("  FROM B_USER_INFO@SB ");
+        sql.append(" WHERE KOR_NAME = ? ");
+        sql.append("   AND BIRTHDATE = TO_CHAR(TO_DATE(?, 'YYYY-MM-DD'), ");
+        sql.append("                           'RRMMDD') ");
+        sql.append("   AND PHONE_NO  = REPLACE(?, '-', '') ");
+        sql.append("UNION ALL ");
+        sql.append("SELECT 'H.J', MEMBERID");
+        sql.append("  FROM B_MEMBER@HJ ");
+        sql.append(" WHERE USERNAME = ? ");
+        sql.append("   AND BIRTHDAY    = ? ");
+        sql.append("   AND PHONENUMBER = REPLACE(?, '-', '') ");
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+            stmt.setString(1, user.getUser_name());
+            stmt.setString(2, user.getUser_birthday());
+            stmt.setString(3, user.getPhone_no());
+            stmt.setString(4, user.getUser_name());
+            stmt.setString(5, user.getUser_birthday());
+            stmt.setString(6, user.getPhone_no());
+            stmt.setString(7, user.getUser_name());
+            stmt.setString(8, user.getUser_birthday());
+            stmt.setString(9, user.getPhone_no());
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                bankMap.put(rs.getString("bank_cd"), rs.getString("id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
+
+        return bankMap;
     }
 
 }

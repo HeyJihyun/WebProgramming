@@ -31,9 +31,9 @@
     <div class = "col-sm-5">
     <select id="bank_cd" name = "to_bank_cd" class="form-select" onchange="checkAccount()">
         <option value = "JH">JH은행</option>
-        <option value = "SB">숲은행</option>
-        <option value = "GH">건희은행</option>
-        <option value = "HJ">현종은행</option>
+        <option value = "0758">숲은행</option>
+        <option value = "BGH">건희은행</option>
+        <option value = "H.J">현종은행</option>
     </select>
     </div>
     <div class = "col-sm-7">
