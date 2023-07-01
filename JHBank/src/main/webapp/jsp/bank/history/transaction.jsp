@@ -7,7 +7,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">거래일</th>
       <th scope="col">은행</th>
       <th scope="col">계좌번호</th>
       <th scope="col">거래처명</th>
@@ -19,14 +19,14 @@
   <tbody>
   <c:forEach var="history" items="${historyList}">
     <tr>
-      <th scope="row">${history.h_no }</th>
+      <td><fmt:formatDate value="${history.h_datetime}" pattern="MM-dd" /></td>
       <td>${history.from_bank_cd }</td>
       <td>${history.from_account_no }</td>
       <td>${history.to_nm }</td>
-      <td style="color: blue;"><c:if test = "${history.h_class eq '1 ' }">
+      <td style="color: blue;"><c:if test = "${history.h_class eq '2' }">
       <fmt:formatNumber value="${history.h_mount}" pattern="#,###" />
       </c:if></td>
-      <td style="color: red;"><c:if test = "${history.h_class == '2 ' }">
+      <td style="color: red;"><c:if test = "${history.h_class == '1' }">
       -<fmt:formatNumber value="${history.h_mount}" pattern="#,###" />
       </c:if></td>
       <td><fmt:formatNumber value="${history.h_balance }" pattern="#,###" /></td>

@@ -57,7 +57,7 @@ public class AccountDAO {
             stmt.setString(1, account.getAccount_no());
             stmt.setString(2, account.getAccount_nm());
             stmt.setString(3, account.getAccount_pwd());
-            stmt.setInt(4, account.getDeposit_cd());
+            stmt.setString(4, account.getDeposit_cd());
             stmt.setString(5, account.getUser_id());
             stmt.setDate(6, new java.sql.Date(account.getReg_date().getTime()));
             stmt.setDate(7, new java.sql.Date(account.getExpiration_date().getTime()));
@@ -93,7 +93,7 @@ public class AccountDAO {
                 account.setBank_cd(rs.getString("BANK_CD"));
                 account.setAccount_nm(rs.getString("ACCOUNT_NM"));
                 account.setAccount_pwd(rs.getString("ACCOUNT_PWD"));
-                account.setDeposit_cd(rs.getInt("DEPOSIT_CD"));
+                account.setDeposit_cd(rs.getString("DEPOSIT_CD"));
                 account.setUser_id(rs.getString("USER_ID"));
                 account.setReg_date(rs.getDate("REG_DATE"));
                 account.setExpiration_date(rs.getDate("EXPIRATION_DATE"));
@@ -130,7 +130,7 @@ public class AccountDAO {
                 account.setBank_cd(rs.getString("BANK_CD"));
                 account.setAccount_nm(rs.getString("ACCOUNT_NM"));
                 account.setAccount_pwd(rs.getString("ACCOUNT_PWD"));
-                account.setDeposit_cd(rs.getInt("DEPOSIT_CD"));
+                account.setDeposit_cd(rs.getString("DEPOSIT_CD"));
                 account.setUser_id(rs.getString("USER_ID"));
                 account.setReg_date(rs.getDate("REG_DATE"));
                 account.setExpiration_date(rs.getDate("EXPIRATION_DATE"));
@@ -216,78 +216,163 @@ public class AccountDAO {
         return name;
     }
 
+    // openbank 계좌 리스트 불러오기
     public List<List<AccountVO>> getOpenbankList(Map<String, String> bankMap) {
 
         List<List<AccountVO>> openbankList = new ArrayList<List<AccountVO>>();
 
         for (String bank_cd : bankMap.keySet()) {
-            StringBuilder sql = new StringBuilder();
-            sql.append(
-                    "SELECT NVL(ACCOUNT_NO, NULL)  AS ACCOUNT_NO, NVL(BANK_CD, NULL)     AS BANK_CD, NVL(ACCOUNT_NM, NULL)  AS ACCOUNT_NM, NVL(ACCOUNT_PWD, NULL) AS ACCOUNT_PWD, ");
-            sql.append(
-                    "       NVL(DEPOSIT_CD, NULL)  AS DEPOSIT_CD, NVL(USER_ID, NULL)     AS USER_ID, NVL(REG_DATE, NULL)    AS REG_DATE, NVL(BALANCE, NULL)     AS BALANCE ");
-            sql.append("  from (");
-            switch (bank_cd) {
-            case "H.J":
-                sql.append("SELECT ACCOUNT_NO, BANKCODE  BANK_CD, PASSWORD  ACCOUNT_PWD,");
-                sql.append("       PRODUCTID DEPOSIT_CD, MEMBERID  USER_ID, MONEY     BALANCE");
-                sql.append("  FROM B_ACCOUNT@HJ");
-                sql.append(" WHERE MEMBERID = ?");
-                break;
-            case "0758":
-                sql.append(
-                        "SELECT ACCOUNT_NO, B_BANK_CODE      BANK_CD, ACCOUNT_NICKNAME ACCOUNT_NM, ACCOUNT_PASSWORD ACCOUNT_PWD,");
-                sql.append(
-                        "       CREATED_DATE     REG_DATE, D_PRODUCT_CODE   DEPOSIT_CD, USER_ID, TOTAL_BALANCE    BALANCE");
-                sql.append("  FROM B_USER_ACCOUNT@SB");
-                sql.append(" WHERE USER_ID = ?");
-                break;
-            case "BGH":
-                sql.append(
-                        "SELECT ACCOUNT_NO, BANK_CODE       BANK_CD, ACCOUNT_NAME    ACCOUNT_NM, ACCOUNT_PW      ACCOUNT_PWD,");
-                sql.append("       PRODUCT_NO      DEPOSIT_CD, USER_ID, ACCOUNT_BALANCE BALANCE");
-                sql.append("  FROM B_ACCOUNT@GH");
-                sql.append(" WHERE USER_ID = ?");
-                break;
-            }
-
-            sql.append(")");
-
-            System.out.println(sql.toString());
-            List<AccountVO> accountList = new ArrayList<AccountVO>();
-            try {
-                conn = JDBCUtil.getConnection();
-                stmt = conn.prepareStatement(sql.toString());
-                stmt.setString(1, bankMap.get(bank_cd));
-
-                rs = stmt.executeQuery();
-
-                while (rs.next()) {
-                    AccountVO account = new AccountVO();
-//                    account.setAccount_id(rs.getInt("ACCOUNT_ID"));
-                    account.setAccount_no(rs.getString("ACCOUNT_NO"));
-                    account.setBank_cd(rs.getString("BANK_CD"));
-                    account.setAccount_nm(rs.getString("ACCOUNT_NM"));
-                    account.setAccount_pwd(rs.getString("ACCOUNT_PWD"));
-                    account.setDeposit_cd(rs.getInt("DEPOSIT_CD"));
-                    account.setUser_id(rs.getString("USER_ID"));
-                    account.setReg_date(rs.getDate("REG_DATE"));
-//                    account.setExpiration_date(rs.getDate("EXPIRATION_DATE"));
-                    account.setBalance(rs.getLong("BALANCE"));
-//                    account.setStatus(rs.getInt("STATUS"));
-
-                    accountList.add(account);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                JDBCUtil.close(rs, stmt, conn);
-            }
+            List<AccountVO> accountList = getAccountList(bank_cd, bankMap.get(bank_cd));
             openbankList.add(accountList);
         }
 
         return openbankList;
     }
 
+    // 각 은행 계좌 리스트
+    public List<AccountVO> getAccountList(String bank_cd, String id) {
+        StringBuilder sql = new StringBuilder();
+        switch (bank_cd) {
+        case "H.J":
+            sql.append("SELECT ACCOUNT_NO, ");
+            sql.append("       BANKCODE  BANK_CD,");
+            sql.append("       NULL      AS ACCOUNT_NM,");
+            sql.append("       PASSWORD  ACCOUNT_PWD,");
+            sql.append("       PRODUCTID DEPOSIT_CD,");
+            sql.append("       MEMBERID  USER_ID,");
+            sql.append("       NULL      AS REG_DATE,");
+            sql.append("       MONEY     BALANCE");
+            sql.append("  FROM B_ACCOUNT@HJ");
+            sql.append(" WHERE MEMBERID = ?");
+            break;
+        case "0758":
+            sql.append("SELECT ACCOUNT_NO,");
+            sql.append("       B_BANK_CODE      BANK_CD,");
+            sql.append("       ACCOUNT_NICKNAME ACCOUNT_NM,");
+            sql.append("       ACCOUNT_PASSWORD ACCOUNT_PWD,");
+            sql.append("       D_PRODUCT_CODE   DEPOSIT_CD,");
+            sql.append("       USER_ID,");
+            sql.append("       CREATED_DATE     REG_DATE,");
+            sql.append("       TOTAL_BALANCE    BALANCE");
+            sql.append("  FROM B_USER_ACCOUNT@SB");
+            sql.append(" WHERE USER_ID = ?");
+            break;
+        case "BGH":
+            sql.append("SELECT ACCOUNT_NO,");
+            sql.append("       BANK_CODE       BANK_CD,");
+            sql.append("       ACCOUNT_NAME    ACCOUNT_NM,");
+            sql.append("       ACCOUNT_PW      ACCOUNT_PWD,");
+            sql.append("       PRODUCT_NO      DEPOSIT_CD,");
+            sql.append("       USER_ID,");
+            sql.append("       NULL AS REG_DATE,");
+            sql.append("       ACCOUNT_BALANCE BALANCE");
+            sql.append("  FROM B_ACCOUNT@GH");
+            sql.append(" WHERE USER_ID = ?");
+            break;
+        }
+
+        List<AccountVO> accountList = new ArrayList<AccountVO>();
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+            stmt.setString(1, id);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                AccountVO account = new AccountVO();
+//                account.setAccount_id(rs.getInt("ACCOUNT_ID"));
+                account.setAccount_no(rs.getString("ACCOUNT_NO"));
+                account.setBank_cd(rs.getString("BANK_CD"));
+                account.setAccount_nm(rs.getString("ACCOUNT_NM"));
+                account.setAccount_pwd(rs.getString("ACCOUNT_PWD"));
+                account.setDeposit_cd(rs.getString("DEPOSIT_CD"));
+                account.setUser_id(rs.getString("USER_ID"));
+                account.setReg_date(rs.getDate("REG_DATE"));
+//                account.setExpiration_date(rs.getDate("EXPIRATION_DATE"));
+                account.setBalance(rs.getLong("BALANCE"));
+//                account.setStatus(rs.getInt("STATUS"));
+
+                accountList.add(account);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
+
+        return accountList;
+    }
+
+    // 오븐뱅킹 계좌 상세보기
+    public AccountVO getAccount(String account_no, String bank_cd) {
+        AccountVO account = new AccountVO();
+        StringBuilder sql = new StringBuilder();
+        switch (bank_cd) {
+        case "H.J":
+            sql.append("SELECT ACCOUNT_NO, ");
+            sql.append("       BANKCODE  BANK_CD,");
+            sql.append("       NULL      AS ACCOUNT_NM,");
+            sql.append("       PASSWORD  ACCOUNT_PWD,");
+            sql.append("       PRODUCTID DEPOSIT_CD,");
+            sql.append("       MEMBERID  USER_ID,");
+            sql.append("       NULL      AS REG_DATE,");
+            sql.append("       MONEY     BALANCE");
+            sql.append("  FROM B_ACCOUNT@HJ");
+            sql.append(" WHERE account_no = ?");
+            break;
+        case "0758":
+            sql.append("SELECT ACCOUNT_NO,");
+            sql.append("       B_BANK_CODE      BANK_CD,");
+            sql.append("       ACCOUNT_NICKNAME ACCOUNT_NM,");
+            sql.append("       ACCOUNT_PASSWORD ACCOUNT_PWD,");
+            sql.append("       D_PRODUCT_CODE   DEPOSIT_CD,");
+            sql.append("       USER_ID,");
+            sql.append("       CREATED_DATE     REG_DATE,");
+            sql.append("       TOTAL_BALANCE    BALANCE");
+            sql.append("  FROM B_USER_ACCOUNT@SB");
+            sql.append(" WHERE account_no = ?");
+            break;
+        case "BGH":
+            sql.append("SELECT ACCOUNT_NO,");
+            sql.append("       BANK_CODE       BANK_CD,");
+            sql.append("       ACCOUNT_NAME    ACCOUNT_NM,");
+            sql.append("       ACCOUNT_PW      ACCOUNT_PWD,");
+            sql.append("       PRODUCT_NO      DEPOSIT_CD,");
+            sql.append("       USER_ID,");
+            sql.append("       NULL AS REG_DATE,");
+            sql.append("       ACCOUNT_BALANCE BALANCE");
+            sql.append("  FROM B_ACCOUNT@GH");
+            sql.append(" WHERE account_no = ?");
+            break;
+        }
+
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
+            stmt.setString(1, account_no);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                account.setAccount_no(rs.getString("ACCOUNT_NO"));
+                account.setBank_cd(rs.getString("BANK_CD"));
+                account.setAccount_nm(rs.getString("ACCOUNT_NM"));
+                account.setAccount_pwd(rs.getString("ACCOUNT_PWD"));
+                account.setDeposit_cd(rs.getString("DEPOSIT_CD"));
+                account.setUser_id(rs.getString("USER_ID"));
+                account.setReg_date(rs.getDate("REG_DATE"));
+                account.setBalance(rs.getLong("BALANCE"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
+
+        return account;
+    }
 }

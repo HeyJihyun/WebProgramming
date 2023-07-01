@@ -14,7 +14,9 @@
             <b>계좌조회</b>
         </div>
         <div>
+            <a href = "${pageContext.request.contextPath }/agreePage.do">
             <div class="img img2"></div>
+            </a>
             <b>오픈뱅킹</b>
         </div>
         <div>
@@ -31,4 +33,5 @@
         </div>
     </div>
 </div>
+
 <jsp:include page="/jsp/include/bottom.jsp" />

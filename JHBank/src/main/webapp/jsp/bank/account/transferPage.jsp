@@ -10,9 +10,7 @@
     <div class = "col-sm-9">
     <select class="form-select" name = "account_id" onchange="this.form.submit()">
         <c:forEach var="a" items="${accountList }">
-            <c:if test="${a.deposit_cd == 1 }">
                 <option value = "${a.account_id }" <c:if test="${a.account_no == account.account_no }">selected</c:if>>${a.account_no }</option>
-            </c:if>
         </c:forEach>
     </select>
     </div>

@@ -5,7 +5,7 @@
 <jsp:include page="/jsp/include/top.jsp" />
 <section id="accountList" class="container text-center">
     <div class="row" style="max-width: 700px;">
-        <h4>JH은행 계좌 조회</h4>
+        <h4>JH은행</h4>
         <h5>
             총 :
             <fmt:formatNumber value="${sumBalance }" pattern="#,###" />

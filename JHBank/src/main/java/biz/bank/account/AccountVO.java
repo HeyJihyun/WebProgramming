@@ -8,7 +8,7 @@ public class AccountVO {
     private String bank_cd;
     private String account_nm;
     private String account_pwd;
-    private int deposit_cd;
+    private String deposit_cd;
     private String user_id;
     private Date reg_date;
     private Date expiration_date;
@@ -21,7 +21,7 @@ public class AccountVO {
     }
 
     public AccountVO(int account_id, String account_no, String bank_cd, String account_nm, String account_pwd,
-            int deposit_cd, String user_id, Date reg_date, Date expiration_date, long balance, int status) {
+            String deposit_cd, String user_id, Date reg_date, Date expiration_date, long balance, int status) {
         super();
         this.account_id = account_id;
         this.account_no = account_no;
@@ -76,11 +76,11 @@ public class AccountVO {
         this.account_pwd = account_pwd;
     }
 
-    public int getDeposit_cd() {
+    public String getDeposit_cd() {
         return deposit_cd;
     }
 
-    public void setDeposit_cd(int deposit_cd) {
+    public void setDeposit_cd(String deposit_cd) {
         this.deposit_cd = deposit_cd;
     }
 

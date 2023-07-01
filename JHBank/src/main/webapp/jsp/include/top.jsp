@@ -17,6 +17,7 @@
 <script src="/JHBank/js/ajax.js" defer></script>
     <script src="https://developer.kakao.com/sdk/js/kakao.js"></script>
     <script src="${pageContext.request.contextPath }/js/loginAPI.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>

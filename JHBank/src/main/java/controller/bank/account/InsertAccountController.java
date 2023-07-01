@@ -31,7 +31,7 @@ public class InsertAccountController implements Controller {
         account.setAccount_nm(request.getParameter("account_nm"));
         account.setAccount_pwd(request.getParameter("account_pwd"));
         account.setBank_cd("JH");
-        account.setDeposit_cd(Integer.parseInt(request.getParameter("deposit_cd")));
+        account.setDeposit_cd(request.getParameter("deposit_cd"));
         account.setUser_id(((UserVO) session.getAttribute("user")).getUser_id());
         account.setBalance(Long.parseLong(request.getParameter("balance")));
 
